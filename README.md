@@ -1,4 +1,4 @@
-# Vert.x handlers-http-api
+# Vert.x http api
 Rest/mvc like framework build upon vertx-http-handlers. The application registers controllers and makes them available for http requests.
 
 [![Build Status](https://travis-ci.org/spriet2000/vertx-handlers-http-api.svg?branch=master)](https://travis-ci.org/spriet2000/vertx-handlers-http-api)
