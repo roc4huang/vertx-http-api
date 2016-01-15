@@ -26,7 +26,7 @@ public class DefaultParameterBinder implements ParameterBinder {
         for (ParameterInfo parameter : context.controller().methodInfo().parameters()) {
             Future<Object> future = Future.future();
             bindingContext.add(future);
-            parameter.newValueHandlerInstance().get(parameter, context, future);
+            //parameter.newValueHandlerInstance().get(parameter, context, future);
         }
     }
 }

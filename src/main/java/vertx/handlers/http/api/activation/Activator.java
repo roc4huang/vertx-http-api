@@ -5,6 +5,4 @@ import java.lang.reflect.InvocationTargetException;
 public interface Activator {
     Object activate() throws InvocationTargetException, IllegalAccessException;
 
-
-
 }

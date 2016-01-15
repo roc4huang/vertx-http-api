@@ -1,18 +1,10 @@
 package vertx.handlers.http.api.impl;
 
-import com.github.spriet2000.vertx.handlers.http.server.ServerHandlers;
-import com.github.spriet2000.vertx.handlers.http.server.ext.impl.ResponseTimeHandler;
-import com.github.spriet2000.vertx.handlers.http.server.ext.impl.TimeOutHandler;
-import com.github.spriet2000.vertx.httprouter.RouteHandler;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerRequest;
 import vertx.handlers.http.api.WebApp;
 import vertx.handlers.http.api.builders.AppBuilder;
-import vertx.handlers.http.api.ext.impl.*;
-import vertx.handlers.http.api.routing.impl.RoutingContext;
-
-import static com.github.spriet2000.vertx.handlers.http.server.ServerHandlers.handlers;
 
 public class DefaultWebApp implements WebApp {
     private final Vertx vertx;
@@ -39,6 +31,7 @@ public class DefaultWebApp implements WebApp {
     }
 
     private Handler<HttpServerRequest> handler() {
+        /*
         final ServerHandlers handlers;
         if (builder.requestHandlers() == null) {
             handlers = defaultHandlers();
@@ -74,23 +67,8 @@ public class DefaultWebApp implements WebApp {
                     break;
             }
         });
+        */
         return builder.router();
     }
 
-    private ServerHandlers defaultHandlers() {
-        return handlers(
-                new TimeOutHandler(vertx, 1000),
-                new ResponseTimeHandler(),
-                new LogHandler(),
-                new ContentTypeHandler(),
-                new RouteMethodHandler(),
-                new JsonResponseHandler(),
-                new EndHandler())
-                .exceptionHandler(
-                        handlers(new TimeOutHandler(vertx, 1000),
-                                new ResponseTimeHandler(),
-                                new LogHandler(),
-                                new ContentTypeHandler(),
-                                new JsonResponseHandler()));
-    }
 }

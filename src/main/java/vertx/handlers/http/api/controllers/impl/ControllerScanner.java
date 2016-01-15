@@ -2,7 +2,7 @@ package vertx.handlers.http.api.controllers.impl;
 
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.impl.LoggerFactory;
+import io.vertx.core.logging.LoggerFactory;
 import vertx.handlers.http.api.activation.Activator;
 import vertx.handlers.http.api.activation.impl.DefaultActivator;
 import vertx.handlers.http.api.controllers.Controller;

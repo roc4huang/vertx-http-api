@@ -37,7 +37,7 @@ public class DefaultActivator implements Activator {
             };
         } else {
             try {
-                activator = (Supplier<Controller>) factory.invoke(null, new Object[]{});
+                activator = (Supplier<Controller>) factory.invoke(null);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException();
             }
