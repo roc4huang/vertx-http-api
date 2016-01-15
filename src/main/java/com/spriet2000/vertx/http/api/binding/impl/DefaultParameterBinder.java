@@ -4,7 +4,7 @@ import com.spriet2000.vertx.http.api.binding.BindingContext;
 import com.spriet2000.vertx.http.api.binding.ParameterBinder;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
-import com.spriet2000.vertx.http.api.activation.Provides;
+import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.routing.impl.ParameterInfo;
 import com.spriet2000.vertx.http.api.routing.impl.RoutingContext;
 
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class DefaultParameterBinder implements ParameterBinder {
 
-    @Provides
+    @Factory
     public static Supplier newInstance() {
         return DefaultParameterBinder::new;
     }
