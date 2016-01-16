@@ -1,12 +1,12 @@
 package com.spriet2000.vertx.http.api.controllers.impl;
 
+import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
+import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.controllers.ControllerRegistryBuilder;
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
-import com.spriet2000.vertx.http.api.activation.Activator;
-import com.spriet2000.vertx.http.api.controllers.Controller;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

@@ -1,8 +1,8 @@
 package com.spriet2000.vertx.http.api.ext.impl;
 
-import com.spriet2000.vertx.http.api.routing.impl.RoutingContext;
 import com.spriet2000.vertx.http.api.ext.Model;
 import com.spriet2000.vertx.http.api.ext.Result;
+import com.spriet2000.vertx.http.api.routing.impl.RoutingContext;
 
 public class WebAppContext implements Model, Result {
     private final RoutingContext routingContext;

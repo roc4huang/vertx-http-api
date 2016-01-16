@@ -14,25 +14,26 @@ public class ActivationTests {
     @Test
     public void testResolveWithFactory() throws InvocationTargetException, IllegalAccessException {
         DefaultActivator activator = new DefaultActivator(ClassWithFactoryImpl.class);
-        Object object =  activator.newInstance();
+        Object object = activator.newInstance();
         assertNotNull(object);
     }
 
     @Test
     public void testResolveWithoutFactory() throws InvocationTargetException, IllegalAccessException {
         DefaultActivator activator = new DefaultActivator(ClassWithoutFactoryImpl.class);
-        Object object =  activator.newInstance();
+        Object object = activator.newInstance();
         assertNotNull(object);
     }
 
     public static class ClassWithFactoryImpl {
 
         @Factory
-        public static Supplier supply(){
+        public static Supplier supply() {
             return ClassWithFactoryImpl::new;
         }
 
     }
 
-    public static class ClassWithoutFactoryImpl { }
+    public static class ClassWithoutFactoryImpl {
+    }
 }

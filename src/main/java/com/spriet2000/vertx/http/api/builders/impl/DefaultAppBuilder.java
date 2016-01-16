@@ -1,11 +1,11 @@
 package com.spriet2000.vertx.http.api.builders.impl;
 
 import com.github.spriet2000.vertx.httprouter.Router;
-import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
-import com.spriet2000.vertx.http.api.routing.impl.RouteScanner;
 import com.spriet2000.vertx.http.api.builders.AppBuilder;
 import com.spriet2000.vertx.http.api.controllers.ControllerRegistryBuilder;
+import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
 import com.spriet2000.vertx.http.api.routing.impl.RouteRegistry;
+import com.spriet2000.vertx.http.api.routing.impl.RouteScanner;
 
 public class DefaultAppBuilder implements AppBuilder {
     private ControllerRegistry controllerRegistry;

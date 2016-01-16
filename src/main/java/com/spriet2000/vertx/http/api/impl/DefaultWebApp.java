@@ -1,10 +1,10 @@
 package com.spriet2000.vertx.http.api.impl;
 
 import com.spriet2000.vertx.http.api.WebApp;
+import com.spriet2000.vertx.http.api.builders.AppBuilder;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerRequest;
-import com.spriet2000.vertx.http.api.builders.AppBuilder;
 
 public class DefaultWebApp implements WebApp {
     private final Vertx vertx;
