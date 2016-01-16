@@ -1,7 +1,7 @@
 package com.spriet2000.vertx.http.api.routing.impl;
 
 
-import com.spriet2000.vertx.http.api.reflection.ActionInfo;
+import com.spriet2000.vertx.http.api.binding.ActionInfo;
 import io.vertx.core.http.HttpServerRequest;
 
 import java.util.Map;

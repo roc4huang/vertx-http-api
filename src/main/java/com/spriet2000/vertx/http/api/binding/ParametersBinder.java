@@ -1,6 +1,7 @@
 package com.spriet2000.vertx.http.api.binding;
 
 import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
+import io.vertx.core.http.HttpServerRequest;
 
 public interface ParametersBinder {
 
@@ -8,5 +9,5 @@ public interface ParametersBinder {
         return new DefaultParametersBinder();
     }
 
-    void bind();
+    void bind(HttpServerRequest request, MethodInfo methodInfo);
 }

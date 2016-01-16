@@ -1,15 +1,15 @@
 package com.spriet2000.vertx.http.api.routing.impl;
 
-import com.spriet2000.vertx.http.api.reflection.ActionInfo;
-import com.spriet2000.vertx.http.api.reflection.MethodInfo;
-import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
-import com.spriet2000.vertx.http.api.routing.*;
-import io.vertx.core.http.HttpMethod;
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.reflection.Parameters;
+import com.spriet2000.vertx.http.api.binding.ActionInfo;
+import com.spriet2000.vertx.http.api.binding.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.Parameters;
 import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
+import com.spriet2000.vertx.http.api.routing.*;
+import io.vertx.core.http.HttpMethod;
 
 import java.lang.annotation.Annotation;
 import java.util.List;

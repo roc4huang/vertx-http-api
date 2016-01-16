@@ -1,6 +1,6 @@
 package com.spriet2000.vertx.http.api.routing.impl;
 
-import com.spriet2000.vertx.http.api.reflection.ActionInfo;
+import com.spriet2000.vertx.http.api.binding.ActionInfo;
 
 import java.util.HashMap;
 

@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.reflection;
+package com.spriet2000.vertx.http.api.binding;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

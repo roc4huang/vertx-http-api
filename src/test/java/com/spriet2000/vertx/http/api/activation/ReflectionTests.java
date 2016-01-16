@@ -1,31 +1,28 @@
 package com.spriet2000.vertx.http.api.activation;
 
 
-import com.spriet2000.vertx.http.api.binding.ParameterBinder;
-import com.spriet2000.vertx.http.api.binding.ParametersBinder;
-import com.spriet2000.vertx.http.api.binding.impl.DefaultParameterBinder;
-import com.spriet2000.vertx.http.api.reflection.MethodInfo;
-import com.spriet2000.vertx.http.api.reflection.Parameter;
-import com.spriet2000.vertx.http.api.reflection.ParameterInfo;
-import com.spriet2000.vertx.http.api.reflection.Parameters;
+import com.spriet2000.vertx.http.api.binding.*;
 import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.controllers.Controller;
+import io.vertx.core.http.HttpServerRequest;
 import org.junit.Test;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ReflectionTests {
 
     @Test
-    public void testMethodInfoNoneParamsWithoutAttributes() throws NoSuchMethodException {
+    public void testMethodInfoNoneParamsWithoutAttributes() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = ControllerImpl.class.getMethod("noneParamsWithoutAttributes");
         MethodInfo methodInfo = new MethodInfo(method);
 
         assertEquals(0, methodInfo.getParameters().length);
-        assertEquals(ControllerImpl.class, methodInfo.getDeclaringClass());
+        assertEquals(ControllerImpl.class, methodInfo.getDeclaringClassActivator().newInstance().getClass());
         assertEquals(DefaultParametersBinder.class.getName(),
                 methodInfo.getParametersBinder().getClass().getName());
     }
@@ -54,35 +51,52 @@ public class ReflectionTests {
                 methodInfo.getParametersBinder().getClass().getName());
     }
 
-    public static class ControllerImpl extends Controller {
+    @Test
+    public void testMethodInvoke1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
+        ParameterInfo parameterInfo1 = new ParameterInfo(method.getParameters()[0]);
+        ParameterInfo parameterInfo2 = new ParameterInfo(method.getParameters()[1]);
+        MethodInfo methodInfo = new MethodInfo(method, parameterInfo1, parameterInfo2);
 
-        @Parameters(binder = CustomParametersBinder.class)
-        public Result customAttributes(@Parameter(name = "test") String test){
-            return new Result();
-        }
+        MethodInvoke invoke = new MethodInvoke(methodInfo, "hello", "world");
 
-        public Result noneParamsWithoutAttributes(){
-            return new Result();
-        }
+        Object result = invoke.invoke();
 
-        public Result oneParamsWithoutAttributes(String test){
-            return new Result();
-        }
-
-        @Factory
-        public static Supplier factory(){
-            return ControllerImpl::new;
-        }
+        assertNotNull(result);
+        assertEquals("hello world", result);
     }
 
-    public static class Result {
 
+    public static class ControllerImpl extends Controller {
+
+        @Factory
+        public static Supplier factory() {
+            return ControllerImpl::new;
+        }
+
+        public String method1(String hi, String what) {
+            return String.format("%s %s", hi, what);
+        }
+
+        @Parameters(binder = CustomParametersBinder.class)
+        public String customAttributes(@Parameter(name = "test") String test) {
+            return String.format("%s %s", test, test);
+        }
+
+        public String noneParamsWithoutAttributes() {
+            return null;
+        }
+
+        public String oneParamsWithoutAttributes(String test) {
+            return test;
+        }
     }
 
     public static class CustomParametersBinder implements ParametersBinder {
 
+
         @Override
-        public void bind() {
+        public void bind(HttpServerRequest request, MethodInfo methodInfo) {
 
         }
     }
