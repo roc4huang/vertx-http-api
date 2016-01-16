@@ -14,9 +14,9 @@ public class DefaultParametersBinder implements ParametersBinder {
     }
 
     @Override
-    public void bind(RoutingContext context, MethodInfo methodInfo, Arguments arguments) {
-        for (int i = 0, argumentsLength = arguments.length(); i < argumentsLength; i++) {
-            arguments.set(i, context.parameters().get(methodInfo.parameters()[i].identifier()));
+    public void bind(RoutingContext context, MethodInfo methodInfo, Object... arguments) {
+        for (int i = 0, argumentsLength = arguments.length; i < argumentsLength; i++) {
+            arguments[i] = context.parameters().get(methodInfo.parameters()[i].identifier());
         }
     }
 }

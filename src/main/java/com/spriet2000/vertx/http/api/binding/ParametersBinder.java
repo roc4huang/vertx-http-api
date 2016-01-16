@@ -9,5 +9,5 @@ public interface ParametersBinder {
         return new DefaultParametersBinder();
     }
 
-    void bind(RoutingContext context, MethodInfo methodInfo, Arguments arguments);
+    void bind(RoutingContext context, MethodInfo methodInfo, Object[] arguments);
 }

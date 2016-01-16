@@ -90,7 +90,7 @@ public class MethodInfoTests {
     public static class CustomParametersBinder implements ParametersBinder{
 
         @Override
-        public void bind(RoutingContext context, MethodInfo methodInfo, Arguments arguments) {
+        public void bind(RoutingContext context, MethodInfo methodInfo, Object... arguments) {
 
         }
     }

@@ -11,11 +11,4 @@ public final class ActionInfo {
         this.methodInfo = method;
     }
 
-    public MethodInfo getMethodInfo() {
-        return methodInfo;
-    }
-
-    public Activator getActivator() {
-        return activator;
-    }
 }
