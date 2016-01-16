@@ -29,7 +29,7 @@ public class RouteScanner {
                             ? new DefaultActivator(DefaultParametersBinder.class)
                             : new DefaultActivator(parameterBinding.binder());
                     routeRegistry.get().put(new RouteInfo(route, findHttpMethod(annotations)),
-                            new ActionInfo(activator, new MethodInfo(null, null)));
+                            new ActionInfo(activator, new MethodInfo(null)));
                 }));
     }
 

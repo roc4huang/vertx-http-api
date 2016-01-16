@@ -9,16 +9,15 @@ import java.lang.reflect.InvocationTargetException;
 public final class MethodInvoke {
 
     private final MethodInfo methodInfo;
-    private final Object[] parameters;
 
-    public MethodInvoke(MethodInfo methodInfo, Object... parameters) {
+    public MethodInvoke(MethodInfo methodInfo) {
         this.methodInfo = methodInfo;
-        this.parameters = parameters;
     }
 
-    public Object invoke() throws InvocationTargetException, IllegalAccessException {
+    public Object invoke(Object... parameters) throws InvocationTargetException, IllegalAccessException {
         Activator activator = methodInfo.getDeclaringClassActivator();
         return methodInfo.getMethod().invoke(activator.newInstance(), parameters);
     }
+
 
 }

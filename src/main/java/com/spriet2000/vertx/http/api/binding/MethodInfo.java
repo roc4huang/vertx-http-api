@@ -5,7 +5,8 @@ import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
 import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.*;
+import java.lang.reflect.Parameter;
 
 public final class MethodInfo {
     private final String identifier;
@@ -13,28 +14,30 @@ public final class MethodInfo {
     private final ParameterInfo[] parameters;
     private final ParametersBinder parametersBinder;
 
-    public MethodInfo(Method method, ParameterInfo... parameters) {
+    public MethodInfo(Method method) {
         this.identifier = method.getName();
         this.method = method;
-        this.parameters = parameters;
+        this.parameters = new ParameterInfo[method.getParameters().length];
 
-        Parameters parameters1 = AnnotationsHelper.findFirstAnnotation(method.getAnnotations(), Parameters.class);
-
-        if (parameters1 == null) {
-            this.parametersBinder = new DefaultParametersBinder();
-        } else {
-            DefaultActivator activator = new DefaultActivator(parameters1.binder());
-            this.parametersBinder = (ParametersBinder) activator.newInstance();
+        Parameter[] parameters1 = method.getParameters();
+        for (int i = 0; i < parameters1.length; i++) {
+            parameters[i] = new ParameterInfo(parameters1[i]);
         }
 
-
+        Parameters annotation = AnnotationsHelper.findFirstAnnotation(method.getAnnotations(), Parameters.class);
+        if (annotation == null) {
+            this.parametersBinder = new DefaultParametersBinder();
+        } else {
+            DefaultActivator activator = new DefaultActivator(annotation.binder());
+            this.parametersBinder = (ParametersBinder) activator.newInstance();
+        }
     }
 
     public Method getMethod() {
         return method;
     }
 
-    public ParameterInfo[] getParameters() {
+    public ParameterInfo[] parameters() {
         return parameters;
     }
 
@@ -46,7 +49,7 @@ public final class MethodInfo {
         return new DefaultActivator(method.getDeclaringClass());
     }
 
-    public ParametersBinder getParametersBinder() {
+    public ParametersBinder parametersBinder() {
         return parametersBinder;
     }
 }

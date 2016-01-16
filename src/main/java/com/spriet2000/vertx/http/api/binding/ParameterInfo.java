@@ -27,17 +27,17 @@ public final class ParameterInfo {
         return parameter;
     }
 
-    public String getIdentifier() {
+    public String identifier() {
         return identifier;
     }
 
     @Override
     public int hashCode() {
-        return getIdentifier().hashCode();
+        return identifier().hashCode();
     }
 
     @Override
     public boolean equals(Object object) {
-        return getIdentifier().equals(object);
+        return identifier().equals(object);
     }
 }
