@@ -1,7 +1,7 @@
 # Vert.x http api
 Rest/mvc like framework build upon vertx-http-handlers. The application registers controllers and makes them available for http requests.
 
-[![Build Status](https://travis-ci.org/spriet2000/vertx-handlers-http-api.svg?branch=master)](https://travis-ci.org/spriet2000/vertx-handlers-http-api)
+[![Build Status](https://travis-ci.org/spriet2000/vertx-http-api.svg?branch=master)](https://travis-ci.org/spriet2000/vertx-handlers-http-api)
 
 ##  Experimental
 Currently I am lost in how to parse all data, from url, body, cookies whatever and port them to method parameters. Need a solid plan for solving this without writing too much code... 
