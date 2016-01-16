@@ -20,7 +20,7 @@ public class DefaultActivator implements Activator {
     }
 
     @Override
-    public Object create() {
+    public Object newInstance() {
         if (activator != null) {
             return activator.get();
         }

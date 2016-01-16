@@ -15,8 +15,17 @@ public class AnnotationsHelper {
         return null;
     }
 
-    public static Method findFirstMethodWithAnnotation(Class<?> controllerType, Class<?> attributeType) {
-        for (Method method : controllerType.getMethods()) {
+    public static <T> T findFirstAnnotation(Annotation[] annotations, Class<T> attributeType) {
+        for (Annotation annotation : annotations) {
+            if (attributeType.isAssignableFrom(annotation.annotationType())) {
+                return (T) annotation;
+            }
+        }
+        return null;
+    }
+
+    public static Method findFirstMethodWithAnnotation(Class<?> classType, Class<?> attributeType) {
+        for (Method method : classType.getMethods()) {
             for (Annotation annotation : method.getAnnotations()) {
                 if (attributeType.isAssignableFrom(annotation.annotationType())) {
                     return method;

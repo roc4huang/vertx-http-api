@@ -1,12 +1,14 @@
 package com.spriet2000.vertx.http.api.routing.impl;
 
+import com.spriet2000.vertx.http.api.reflection.ActionInfo;
+import com.spriet2000.vertx.http.api.reflection.MethodInfo;
 import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
 import com.spriet2000.vertx.http.api.routing.*;
 import io.vertx.core.http.HttpMethod;
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.binding.Parameters;
-import com.spriet2000.vertx.http.api.binding.impl.DefaultParameterBinder;
+import com.spriet2000.vertx.http.api.reflection.Parameters;
+import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 
 import java.lang.annotation.Annotation;
@@ -24,10 +26,10 @@ public class RouteScanner {
                     Activator binderActivator = null;
                     Parameters parameterBinding = AnnotationsHelper.findFirstAnnotation(annotations, Parameters.class);
                     binderActivator = parameterBinding == null
-                            ? new DefaultActivator(DefaultParameterBinder.class)
+                            ? new DefaultActivator(DefaultParametersBinder.class)
                             : new DefaultActivator(parameterBinding.binder());
                     routeRegistry.get().put(new RouteInfo(route, findHttpMethod(annotations)),
-                            new ControllerInfo(activator, new MethodInfo(binderActivator, method)));
+                            new ActionInfo(activator, new MethodInfo(null, null)));
                 }));
     }
 
