@@ -1,18 +1,17 @@
 package com.spriet2000.vertx.http.api.routing.impl;
 
-
-import com.spriet2000.vertx.http.api.binding.ActionInfo;
+import com.spriet2000.vertx.http.api.binding.MethodInfo;
 import io.vertx.core.http.HttpServerRequest;
 
 import java.util.Map;
 
 public class RoutingContext {
     private final RouteInfo routeInfo;
-    private final ActionInfo controllerInfo;
+    private final MethodInfo controllerInfo;
     private Map<String, String> parameters;
     private HttpServerRequest request;
 
-    public RoutingContext(RouteInfo key, ActionInfo value, Map<String, String> parameters, HttpServerRequest request) {
+    public RoutingContext(RouteInfo key, MethodInfo value, Map<String, String> parameters, HttpServerRequest request) {
 
         this.routeInfo = key;
         this.controllerInfo = value;
@@ -28,7 +27,7 @@ public class RoutingContext {
         return parameters;
     }
 
-    public ActionInfo controller() {
+    public MethodInfo controller() {
         return controllerInfo;
     }
 }

@@ -9,13 +9,13 @@ import java.lang.reflect.*;
 import java.lang.reflect.Parameter;
 
 public final class MethodInfo {
-    private final String identifier;
+    private final String name;
     private final Method method;
     private final ParameterInfo[] parameters;
     private final ParametersBinder parametersBinder;
 
     public MethodInfo(Method method) {
-        this.identifier = method.getName();
+        this.name = method.getName();
         this.method = method;
         this.parameters = new ParameterInfo[method.getParameters().length];
 
@@ -41,8 +41,8 @@ public final class MethodInfo {
         return parameters;
     }
 
-    public String getIdentifier() {
-        return identifier;
+    public String name() {
+        return name;
     }
 
     public Activator getDeclaringClassActivator() {

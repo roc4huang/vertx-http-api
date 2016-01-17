@@ -33,7 +33,7 @@ public class MethodInfoTests {
         MethodInfo methodInfo = new MethodInfo(method);
 
         assertEquals(1, methodInfo.parameters().length);
-        assertEquals("arg0", methodInfo.parameters()[0].identifier());
+        assertEquals("arg0", methodInfo.parameters()[0].name());
         assertEquals(DefaultParametersBinder.class.getName(),
                 methodInfo.parametersBinder().getClass().getName());
     }
@@ -44,7 +44,7 @@ public class MethodInfoTests {
         MethodInfo methodInfo = new MethodInfo(method);
 
         assertEquals(1, methodInfo.parameters().length);
-        assertEquals("test", methodInfo.parameters()[0].identifier());
+        assertEquals("test", methodInfo.parameters()[0].name());
         assertEquals(CustomParametersBinder.class.getName(),
                 methodInfo.parametersBinder().getClass().getName());
     }

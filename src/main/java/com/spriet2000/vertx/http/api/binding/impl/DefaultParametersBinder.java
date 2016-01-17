@@ -1,7 +1,10 @@
 package com.spriet2000.vertx.http.api.binding.impl;
 
 import com.spriet2000.vertx.http.api.activation.Factory;
-import com.spriet2000.vertx.http.api.binding.*;
+
+import com.spriet2000.vertx.http.api.binding.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.ParameterInfo;
+import com.spriet2000.vertx.http.api.binding.ParametersBinder;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 
 import java.util.function.Supplier;
@@ -15,8 +18,10 @@ public class DefaultParametersBinder implements ParametersBinder {
 
     @Override
     public void bind(RoutingContext context, MethodInfo methodInfo, Object... arguments) {
-        for (int i = 0, argumentsLength = arguments.length; i < argumentsLength; i++) {
-            arguments[i] = context.parameters().get(methodInfo.parameters()[i].identifier());
+        ParameterInfo[] parameters = methodInfo.parameters();
+        for (int i = 0; i < parameters.length; i++) {
+            ParameterInfo parameterInfo = parameters[i];
+            arguments[i] = parameterInfo.parameterValue().get(context, methodInfo, parameterInfo);
         }
     }
 }

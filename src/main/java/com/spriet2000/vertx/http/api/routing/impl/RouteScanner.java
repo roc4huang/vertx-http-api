@@ -2,7 +2,6 @@ package com.spriet2000.vertx.http.api.routing.impl;
 
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.binding.ActionInfo;
 import com.spriet2000.vertx.http.api.binding.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.Parameters;
 import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
@@ -29,7 +28,7 @@ public class RouteScanner {
                             ? new DefaultActivator(DefaultParametersBinder.class)
                             : new DefaultActivator(parameterBinding.binder());
                     routeRegistry.get().put(new RouteInfo(route, findHttpMethod(annotations)),
-                            new ActionInfo(activator, new MethodInfo(null)));
+                            null);
                 }));
     }
 

@@ -15,7 +15,7 @@ public final class RoutingContext {
         this.parameters = MultiMap.caseInsensitiveMultiMap();
     }
 
-    public HttpServerRequest getHttpServerRequest() {
+    public HttpServerRequest httpServerRequest() {
         return httpServerRequest;
     }
 

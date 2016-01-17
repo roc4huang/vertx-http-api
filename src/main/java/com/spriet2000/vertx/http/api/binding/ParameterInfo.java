@@ -1,5 +1,6 @@
 package com.spriet2000.vertx.http.api.binding;
 
+import com.spriet2000.vertx.http.api.binding.impl.DefaultParameterValue;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 
 import java.lang.reflect.Parameter;
@@ -7,7 +8,8 @@ import java.lang.reflect.Parameter;
 public final class ParameterInfo {
 
     private final Parameter parameter;
-    private String identifier;
+    private final ParameterValue parameterValue;
+    private final String identifier;
 
     public ParameterInfo(Parameter parameter) {
         com.spriet2000.vertx.http.api.binding.Parameter namedParameter =
@@ -21,23 +23,28 @@ public final class ParameterInfo {
         }
 
         this.parameter = parameter;
+        this.parameterValue = new DefaultParameterValue();
     }
 
-    public Parameter getParameter() {
+    public Parameter parameter() {
         return parameter;
     }
 
-    public String identifier() {
+    public String name() {
         return identifier;
+    }
+
+    public ParameterValue parameterValue() {
+        return parameterValue;
     }
 
     @Override
     public int hashCode() {
-        return identifier().hashCode();
+        return name().hashCode();
     }
 
     @Override
     public boolean equals(Object object) {
-        return identifier().equals(object);
+        return name().equals(object);
     }
 }

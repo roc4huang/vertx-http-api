@@ -27,9 +27,9 @@ public class ParametersBinderTests {
 
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
         MethodInfo info = new MethodInfo(method);
+        ParametersBinder binder = info.parametersBinder();
 
         Object[] arguments = new Object[info.parameters().length];
-        ParametersBinder binder = info.parametersBinder();
         binder.bind(context, info, arguments);
 
         assertEquals("hello", arguments[0]);
