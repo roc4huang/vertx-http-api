@@ -3,13 +3,12 @@ package com.spriet2000.vertx.http.api.binding.method;
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
 import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
-import com.spriet2000.vertx.http.api.binding.parameters.Parameters;
-import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
-import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
-import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
+import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+
+import static com.spriet2000.vertx.http.api.helpers.AnnotationsHelper.findFirstAnnotation;
 
 public final class MethodInfo {
     private final String name;
@@ -27,7 +26,7 @@ public final class MethodInfo {
             parameters[i] = new ParameterInfo(parameters1[i]);
         }
 
-        Parameters annotation = AnnotationsHelper.findFirstAnnotation(method.getAnnotations(), Parameters.class);
+        Parameters annotation = findFirstAnnotation(method.getAnnotations(), Parameters.class);
         if (annotation == null) {
             this.parametersBinder = new DefaultParametersBinder();
         } else {

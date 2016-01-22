@@ -1,6 +1,6 @@
-package com.spriet2000.vertx.http.api.binding.parameters;
+package com.spriet2000.vertx.http.api.binding.method;
 
-import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

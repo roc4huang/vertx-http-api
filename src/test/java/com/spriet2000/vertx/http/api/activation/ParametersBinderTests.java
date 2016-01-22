@@ -1,12 +1,13 @@
 package com.spriet2000.vertx.http.api.activation;
 
+import com.spriet2000.vertx.http.api.binding.value.Value;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
 import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
 import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
-import com.spriet2000.vertx.http.api.binding.parameters.Parameters;
-import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
-import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.method.Parameters;
+import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 import io.vertx.core.http.HttpMethod;
@@ -35,11 +36,11 @@ public class ParametersBinderTests {
         MethodInfo info = new MethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
-        Object[] arguments = new Object[info.parameters().length];
+        Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, info, arguments);
 
-        assertEquals("hello1", arguments[0]);
-        assertEquals("world1", arguments[1]);
+        assertEquals("hello1", arguments[0].getValue());
+        assertEquals("world1", arguments[1].getValue());
     }
 
     @Test
@@ -55,11 +56,11 @@ public class ParametersBinderTests {
         MethodInfo info = new MethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
-        Object[] arguments = new Object[info.parameters().length];
+        Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, info, arguments);
 
-        assertEquals("hello2", arguments[0]);
-        assertEquals("world2", arguments[1]);
+        assertEquals("hello2", arguments[0].getValue());
+        assertEquals("world2", arguments[1].getValue());
     }
 
     @Test
@@ -75,11 +76,11 @@ public class ParametersBinderTests {
         MethodInfo info = new MethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
-        Object[] arguments = new Object[info.parameters().length];
+        Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, info, arguments);
 
-        assertEquals("hello3", arguments[0]);
-        assertEquals("world3", arguments[1]);
+        assertEquals("hello3", arguments[0].getValue());
+        assertEquals("world3", arguments[1].getValue());
     }
 
     public static class ControllerImpl extends Controller {

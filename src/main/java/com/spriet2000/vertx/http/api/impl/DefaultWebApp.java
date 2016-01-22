@@ -43,12 +43,12 @@ public class DefaultWebApp implements WebApp {
         builder.router().notFoundHandler((ServerHandlers) handlers((fail, next) -> (req, res, args)
                 -> fail.handle(new ErrorContext(404))).exceptionHandler(handlers.exceptionHandler()));
 
-        builder.routes().get().forEach((routeInfo, controllerInfo) -> {
+        builder.routes().getValue().forEach((routeInfo, controllerInfo) -> {
             RouteHandler handler = (req, parameters) ->
                     handlers.handle(req, new WebAppContext(new RoutingContext(routeInfo, controllerInfo, parameters, req)));
             switch (routeInfo.httpMethod()) {
                 case GET:
-                    builder.router().get(routeInfo.route().path(), handler);
+                    builder.router().getValue(routeInfo.route().path(), handler);
                     break;
                 case HEAD:
                     builder.router().head(routeInfo.route().path(), handler);
