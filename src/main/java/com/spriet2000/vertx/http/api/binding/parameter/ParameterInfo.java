@@ -26,11 +26,11 @@ public final class ParameterInfo {
         return name;
     }
 
-    public boolean getValueFromQuery(){
+    public boolean getValueFromQuery() {
         return fromQuery;
     }
 
-    public boolean getValueFromCookie(){
+    public boolean getValueFromCookie() {
         return fromCookie;
     }
 
@@ -44,7 +44,7 @@ public final class ParameterInfo {
         return name().equals(object);
     }
 
-    private String getName(){
+    private String getName() {
         com.spriet2000.vertx.http.api.binding.parameter.Parameter namedParameter =
                 findFirstAnnotation(parameter.getAnnotations(),
                         com.spriet2000.vertx.http.api.binding.parameter.Parameter.class);
@@ -56,9 +56,9 @@ public final class ParameterInfo {
         }
     }
 
-    private boolean getFromQuery(){
+    private boolean getFromQuery() {
         FromQuery namedParameter = findFirstAnnotation(parameter.getAnnotations(),
-                        FromQuery.class);
+                FromQuery.class);
 
         if (namedParameter == null) {
             return false;
@@ -67,7 +67,7 @@ public final class ParameterInfo {
         }
     }
 
-    private boolean getFromCookie(){
+    private boolean getFromCookie() {
         FromCookie namedParameter = findFirstAnnotation(parameter.getAnnotations(),
                 FromCookie.class);
 

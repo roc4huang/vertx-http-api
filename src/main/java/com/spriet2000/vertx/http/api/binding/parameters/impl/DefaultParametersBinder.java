@@ -1,11 +1,10 @@
 package com.spriet2000.vertx.http.api.binding.parameters.impl;
 
 import com.spriet2000.vertx.http.api.activation.Factory;
-
-import com.spriet2000.vertx.http.api.binding.value.impl.DefaultParameterValue;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.value.impl.DefaultParameterValue;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 
 import java.util.function.Supplier;

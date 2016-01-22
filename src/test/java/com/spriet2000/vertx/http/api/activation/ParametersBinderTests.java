@@ -1,12 +1,12 @@
 package com.spriet2000.vertx.http.api.activation;
 
+import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
 import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
 import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.binding.parameters.Parameters;
 import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
 import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 import io.vertx.core.http.HttpMethod;
@@ -17,8 +17,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
-import static org.junit.Assert.assertEquals;
 import static io.vertx.core.http.HttpHeaders.COOKIE;
+import static org.junit.Assert.assertEquals;
 
 public class ParametersBinderTests {
 

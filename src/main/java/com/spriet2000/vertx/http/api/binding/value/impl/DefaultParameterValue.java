@@ -10,10 +10,10 @@ public class DefaultParameterValue implements ParameterValue {
 
     @Override
     public Object get(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
-        if(parameterInfo.getValueFromCookie()){
+        if (parameterInfo.getValueFromCookie()) {
             return new CookieValue().get(context, methodInfo, parameterInfo);
-        }else if(parameterInfo.getValueFromQuery()){
-             return new QueryValue().get(context, methodInfo, parameterInfo);
+        } else if (parameterInfo.getValueFromQuery()) {
+            return new QueryValue().get(context, methodInfo, parameterInfo);
         } else {
             return new ParametersValue().get(context, methodInfo, parameterInfo);
         }

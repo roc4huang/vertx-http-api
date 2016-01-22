@@ -8,7 +8,7 @@ import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
 import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 
-import java.lang.reflect.*;
+import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
 public final class MethodInfo {

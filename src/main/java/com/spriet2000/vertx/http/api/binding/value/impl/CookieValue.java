@@ -15,7 +15,7 @@ public class CookieValue implements ParameterValue {
         String header = context.request().headers().get(COOKIE);
         if (header != null) {
             for (io.netty.handler.codec.http.cookie.Cookie cookie : ServerCookieDecoder.STRICT.decode(header)) {
-                if (cookie.name().equalsIgnoreCase(parameterInfo.name())){
+                if (cookie.name().equalsIgnoreCase(parameterInfo.name())) {
                     return cookie.value();
                 }
             }

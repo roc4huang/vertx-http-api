@@ -29,6 +29,10 @@ public class TestHttpServerRequest implements HttpServerRequest {
         this.headers = caseInsensitiveMultiMap();
     }
 
+    static <T> T coalesce(T a, T b) {
+        return a == null ? b : a;
+    }
+
     @Override
     public HttpServerRequest exceptionHandler(Handler<Throwable> handler) {
         return null;
@@ -172,9 +176,5 @@ public class TestHttpServerRequest implements HttpServerRequest {
     @Override
     public boolean isEnded() {
         return false;
-    }
-
-    static <T> T coalesce(T a, T b) {
-        return a == null ? b : a;
     }
 }
