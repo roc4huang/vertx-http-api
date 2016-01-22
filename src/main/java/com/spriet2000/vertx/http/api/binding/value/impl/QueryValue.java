@@ -1,8 +1,8 @@
-package com.spriet2000.vertx.http.api.binding.impl;
+package com.spriet2000.vertx.http.api.binding.value.impl;
 
-import com.spriet2000.vertx.http.api.binding.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.ParameterInfo;
-import com.spriet2000.vertx.http.api.binding.ParameterValue;
+import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
+import com.spriet2000.vertx.http.api.binding.value.ParameterValue;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 
 import java.io.UnsupportedEncodingException;
@@ -12,7 +12,7 @@ public class QueryValue implements ParameterValue {
 
     @Override
     public Object get(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
-        final String[] pairs = context.httpServerRequest().query().split("&");
+        final String[] pairs = context.request().query().split("&");
         for (String pair : pairs) {
             final int idx = pair.indexOf("=");
             try {

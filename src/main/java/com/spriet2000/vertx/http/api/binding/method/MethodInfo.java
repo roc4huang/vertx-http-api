@@ -1,8 +1,11 @@
-package com.spriet2000.vertx.http.api.binding;
+package com.spriet2000.vertx.http.api.binding.method;
 
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
+import com.spriet2000.vertx.http.api.binding.parameters.Parameters;
+import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 
 import java.lang.reflect.*;

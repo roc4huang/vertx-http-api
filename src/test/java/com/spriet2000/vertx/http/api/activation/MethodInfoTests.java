@@ -1,8 +1,12 @@
 package com.spriet2000.vertx.http.api.activation;
 
 
-import com.spriet2000.vertx.http.api.binding.*;
-import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
+import com.spriet2000.vertx.http.api.binding.parameters.Parameters;
+import com.spriet2000.vertx.http.api.binding.parameters.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.method.MethodInvoke;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 import org.junit.Test;
@@ -87,7 +91,7 @@ public class MethodInfoTests {
         }
     }
 
-    public static class CustomParametersBinder implements ParametersBinder{
+    public static class CustomParametersBinder implements ParametersBinder {
 
         @Override
         public void bind(RoutingContext context, MethodInfo methodInfo, Object... arguments) {

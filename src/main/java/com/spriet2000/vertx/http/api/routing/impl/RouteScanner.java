@@ -2,9 +2,8 @@ package com.spriet2000.vertx.http.api.routing.impl;
 
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.binding.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.Parameters;
-import com.spriet2000.vertx.http.api.binding.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameters.Parameters;
+import com.spriet2000.vertx.http.api.binding.parameters.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
 import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 import com.spriet2000.vertx.http.api.routing.*;

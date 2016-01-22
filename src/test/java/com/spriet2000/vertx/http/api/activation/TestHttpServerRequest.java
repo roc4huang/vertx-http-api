@@ -10,11 +10,15 @@ import io.vertx.core.net.SocketAddress;
 import javax.net.ssl.SSLPeerUnverifiedException;
 import javax.security.cert.X509Certificate;
 
+import static io.vertx.core.MultiMap.caseInsensitiveMultiMap;
+
 public class TestHttpServerRequest implements HttpServerRequest {
 
     private final HttpMethod method;
     private final String path;
     private final String query;
+
+    private MultiMap headers;
 
     public TestHttpServerRequest(HttpMethod method, String path) {
 
@@ -22,6 +26,7 @@ public class TestHttpServerRequest implements HttpServerRequest {
         this.path = path;
         String[] pair = path.split("\\?");
         this.query = pair.length > 1 ? pair[1] : "";
+        this.headers = caseInsensitiveMultiMap();
     }
 
     @Override
@@ -81,7 +86,7 @@ public class TestHttpServerRequest implements HttpServerRequest {
 
     @Override
     public MultiMap headers() {
-        return null;
+        return headers;
     }
 
     @Override
