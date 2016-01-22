@@ -14,13 +14,15 @@ public class TestHttpServerRequest implements HttpServerRequest {
 
     private final HttpMethod method;
     private final String path;
+    private final String query;
 
     public TestHttpServerRequest(HttpMethod method, String path) {
 
         this.method = method;
         this.path = path;
+        String[] pair = path.split("\\?");
+        this.query = pair.length > 1 ? pair[1] : "";
     }
-
 
     @Override
     public HttpServerRequest exceptionHandler(Handler<Throwable> handler) {
@@ -69,7 +71,7 @@ public class TestHttpServerRequest implements HttpServerRequest {
 
     @Override
     public String query() {
-        return null;
+        return query;
     }
 
     @Override
@@ -165,5 +167,9 @@ public class TestHttpServerRequest implements HttpServerRequest {
     @Override
     public boolean isEnded() {
         return false;
+    }
+
+    static <T> T coalesce(T a, T b) {
+        return a == null ? b : a;
     }
 }

@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 public class ParametersBinderTests {
 
     @Test
-    public void testParametersBinder() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void testParametersValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
         HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/");
         RoutingContext context = new RoutingContext(request);
@@ -36,6 +36,23 @@ public class ParametersBinderTests {
         assertEquals("world", arguments[1]);
     }
 
+
+    @Test
+    public void testQueryValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello&to=world");
+        RoutingContext context = new RoutingContext(request);
+
+        Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
+        MethodInfo info = new MethodInfo(method);
+        ParametersBinder binder = info.parametersBinder();
+
+        Object[] arguments = new Object[info.parameters().length];
+        binder.bind(context, info, arguments);
+
+        assertEquals("hello", arguments[0]);
+        assertEquals("world", arguments[1]);
+    }
 
     public static class ControllerImpl extends Controller {
 

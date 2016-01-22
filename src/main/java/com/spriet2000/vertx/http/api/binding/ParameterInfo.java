@@ -8,7 +8,6 @@ import java.lang.reflect.Parameter;
 public final class ParameterInfo {
 
     private final Parameter parameter;
-    private final ParameterValue parameterValue;
     private final String identifier;
 
     public ParameterInfo(Parameter parameter) {
@@ -23,7 +22,6 @@ public final class ParameterInfo {
         }
 
         this.parameter = parameter;
-        this.parameterValue = new DefaultParameterValue();
     }
 
     public Parameter parameter() {
@@ -32,10 +30,6 @@ public final class ParameterInfo {
 
     public String name() {
         return identifier;
-    }
-
-    public ParameterValue parameterValue() {
-        return parameterValue;
     }
 
     @Override

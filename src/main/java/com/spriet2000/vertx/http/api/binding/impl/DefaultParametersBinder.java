@@ -21,7 +21,8 @@ public class DefaultParametersBinder implements ParametersBinder {
         ParameterInfo[] parameters = methodInfo.parameters();
         for (int i = 0; i < parameters.length; i++) {
             ParameterInfo parameterInfo = parameters[i];
-            arguments[i] = parameterInfo.parameterValue().get(context, methodInfo, parameterInfo);
+            DefaultParameterValue parameterValue = new DefaultParameterValue();
+            arguments[i] = parameterValue.get(context, methodInfo, parameterInfo);
         }
     }
 }
