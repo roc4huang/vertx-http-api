@@ -2,8 +2,8 @@ package com.spriet2000.vertx.http.api.binding.method;
 
 import com.spriet2000.vertx.http.api.activation.Activator;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

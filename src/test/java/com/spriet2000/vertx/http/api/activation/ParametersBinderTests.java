@@ -1,13 +1,13 @@
 package com.spriet2000.vertx.http.api.activation;
 
-import com.spriet2000.vertx.http.api.binding.value.Value;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
-import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
-import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
+import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
+import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
+import com.spriet2000.vertx.http.api.binding.value.Value;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 import io.vertx.core.http.HttpMethod;

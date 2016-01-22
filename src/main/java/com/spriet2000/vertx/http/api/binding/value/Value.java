@@ -1,16 +1,21 @@
 package com.spriet2000.vertx.http.api.binding.value;
 
+public final class Value {
 
-import com.spriet2000.vertx.http.api.binding.value.impl.DefaultValue;
+    private Object value;
+    private Class<?> clazz;
 
-public interface Value {
+    public Value(Object value, Class<?> clazz) {
 
-    Object getValue();
+        this.value = value;
+        this.clazz = clazz;
+    }
 
-    Class<?> getType();
+    public Object getValue() {
+        return value;
+    }
 
-    static Value newValue(Object object, Class<?> clazz){
-        return new DefaultValue(object, clazz);
+    public Class<?> getType() {
+        return clazz;
     }
 }
-

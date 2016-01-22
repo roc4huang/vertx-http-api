@@ -7,10 +7,16 @@ import com.spriet2000.vertx.http.api.binding.value.ValueBinder;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 
 
-public class ParametersValue implements ValueBinder {
+public class DefaultValueBinder implements ValueBinder {
 
     @Override
     public Value bind(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
-        return new Value(context.parameters().get(parameterInfo.name()), parameterInfo.getClass());
+        if (parameterInfo.getValueFromCookie()) {
+            return new CookieValue().bind(context, methodInfo, parameterInfo);
+        } else if (parameterInfo.getValueFromQuery()) {
+            return new QueryValue().bind(context, methodInfo, parameterInfo);
+        } else {
+            return new ParametersValue().bind(context, methodInfo, parameterInfo);
+        }
     }
 }
