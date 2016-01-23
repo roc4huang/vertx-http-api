@@ -83,6 +83,23 @@ public class ParametersBinderTests {
         assertEquals("world3", arguments[1].getValue());
     }
 
+    @Test
+    public void testParametersConvertedIntValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+
+        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/");
+        RoutingContext context = new RoutingContext(request);
+        context.parameters().add("times", "20");
+
+        Method method = ControllerImpl.class.getMethod("method4", int.class );
+        MethodInfo info = new MethodInfo(method);
+        ParametersBinder binder = info.parametersBinder();
+
+        Value[] arguments = new Value[info.parameters().length];
+        binder.bind(context, info, arguments);
+
+        assertEquals(20, arguments[0].getValue());
+    }
+
     public static class ControllerImpl extends Controller {
 
         @Factory
@@ -107,6 +124,11 @@ public class ParametersBinderTests {
         public String method3(@FromCookie @Parameter(name = "greeting") String hi,
                               @FromCookie @Parameter(name = "to") String what) {
             return String.format("%s %s", hi, what);
+        }
+
+        @Parameters(binder = DefaultParametersBinder.class)
+        public String method4(@Parameter(name = "times") int times) {
+            return String.format("times %s", times);
         }
     }
 }
