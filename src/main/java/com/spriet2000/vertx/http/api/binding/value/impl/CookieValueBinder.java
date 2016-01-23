@@ -9,7 +9,7 @@ import io.netty.handler.codec.http.cookie.ServerCookieDecoder;
 
 import static io.vertx.core.http.HttpHeaders.COOKIE;
 
-public class CookieValue implements ValueBinder {
+public class CookieValueBinder implements ValueBinder {
 
     @Override
     public Value bind(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
@@ -17,7 +17,7 @@ public class CookieValue implements ValueBinder {
         if (header != null) {
             for (io.netty.handler.codec.http.cookie.Cookie cookie : ServerCookieDecoder.STRICT.decode(header)) {
                 if (cookie.name().equalsIgnoreCase(parameterInfo.name())) {
-                    return new Value(cookie.value(), String.class);
+                    return new Value(cookie.value());
                 }
             }
         }

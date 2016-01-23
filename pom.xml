@@ -49,6 +49,12 @@
             <version>1.9.17</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.toddfast.typeconverter</groupId>
+            <artifactId>typeconverter</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- For examples scoped to index -->
 
         <dependency>

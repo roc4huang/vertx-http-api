@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 
-public class QueryValue implements ValueBinder {
+public class QueryValueBinder implements ValueBinder {
 
     @Override
     public Value bind(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
@@ -21,7 +21,7 @@ public class QueryValue implements ValueBinder {
                 final String key = idx > 0 ? URLDecoder.decode(pair.substring(0, idx), "UTF-8") : pair;
                 if (key.equalsIgnoreCase(parameterInfo.name())) {
                     final String value = idx > 0 && pair.length() > idx + 1 ? URLDecoder.decode(pair.substring(idx + 1), "UTF-8") : null;
-                    return new Value(value, String.class);
+                    return new Value(value);
                 }
             } catch (UnsupportedEncodingException ignored) {
 

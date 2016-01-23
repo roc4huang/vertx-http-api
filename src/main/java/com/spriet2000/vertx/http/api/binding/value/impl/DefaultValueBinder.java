@@ -12,11 +12,11 @@ public class DefaultValueBinder implements ValueBinder {
     @Override
     public Value bind(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
         if (parameterInfo.getValueFromCookie()) {
-            return new CookieValue().bind(context, methodInfo, parameterInfo);
+            return new CookieValueBinder().bind(context, methodInfo, parameterInfo);
         } else if (parameterInfo.getValueFromQuery()) {
-            return new QueryValue().bind(context, methodInfo, parameterInfo);
+            return new QueryValueBinder().bind(context, methodInfo, parameterInfo);
         } else {
-            return new ParametersValue().bind(context, methodInfo, parameterInfo);
+            return new ParametersValueBinder().bind(context, methodInfo, parameterInfo);
         }
     }
 }

@@ -7,10 +7,10 @@ import com.spriet2000.vertx.http.api.binding.value.ValueBinder;
 import com.spriet2000.vertx.http.api.routing.RoutingContext;
 
 
-public class ParametersValue implements ValueBinder {
+public class ParametersValueBinder implements ValueBinder {
 
     @Override
     public Value bind(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
-        return new Value(context.parameters().get(parameterInfo.name()), parameterInfo.getClass());
+        return new Value(context.parameters().get(parameterInfo.name()));
     }
 }
