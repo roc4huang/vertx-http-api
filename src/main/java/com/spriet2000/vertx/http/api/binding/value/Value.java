@@ -1,16 +1,20 @@
 package com.spriet2000.vertx.http.api.binding.value;
 
+import static com.spriet2000.vertx.http.api.binding.value.Converter.convert;
+
 public final class Value {
 
-    private Object value;
+    private Object rawValue;
+    private Class<?> type;
 
-    public Value(Object value) {
+    public Value(Object rawValue, Class<?> type) {
 
-        this.value = value;
+        this.rawValue = rawValue;
+        this.type = type;
     }
 
     public Object getValue() {
-        return value;
+        return convert(this.type, this.rawValue);
     }
 
 }

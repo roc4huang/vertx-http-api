@@ -17,7 +17,7 @@ public class CookieValueBinder implements ValueBinder {
         if (header != null) {
             for (io.netty.handler.codec.http.cookie.Cookie cookie : ServerCookieDecoder.STRICT.decode(header)) {
                 if (cookie.name().equalsIgnoreCase(parameterInfo.name())) {
-                    return new Value(cookie.value());
+                    return new Value(cookie.value(), parameterInfo.parameter().getType());
                 }
             }
         }

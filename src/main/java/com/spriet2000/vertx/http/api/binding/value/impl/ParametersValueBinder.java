@@ -11,6 +11,7 @@ public class ParametersValueBinder implements ValueBinder {
 
     @Override
     public Value bind(RoutingContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
-        return new Value(context.parameters().get(parameterInfo.name()));
+        return new Value(context.parameters().get(parameterInfo.name()),
+                parameterInfo.parameter().getType());
     }
 }

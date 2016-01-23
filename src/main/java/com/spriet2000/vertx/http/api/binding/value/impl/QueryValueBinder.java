@@ -21,7 +21,7 @@ public class QueryValueBinder implements ValueBinder {
                 final String key = idx > 0 ? URLDecoder.decode(pair.substring(0, idx), "UTF-8") : pair;
                 if (key.equalsIgnoreCase(parameterInfo.name())) {
                     final String value = idx > 0 && pair.length() > idx + 1 ? URLDecoder.decode(pair.substring(idx + 1), "UTF-8") : null;
-                    return new Value(value);
+                    return new Value(value, parameterInfo.parameter().getType());
                 }
             } catch (UnsupportedEncodingException ignored) {
 

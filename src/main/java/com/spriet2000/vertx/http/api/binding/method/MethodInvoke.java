@@ -16,6 +16,7 @@ public final class MethodInvoke {
 
     public Object invoke(Object... parameters) throws InvocationTargetException, IllegalAccessException {
         Activator activator = methodInfo.getDeclaringClassActivator();
+
         return methodInfo.getMethod().invoke(activator.newInstance(), parameters);
     }
 
