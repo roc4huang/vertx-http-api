@@ -13,7 +13,7 @@ At verticle start the verticle scans for controller instances on a given path an
 
    Controllers controllers = scanClassPaths("com.spriet2000.vertx.http.api.example");
         
-   App app = webApp(vertx).configure(builder().use(controllers));
+   App app = webApp().configure(builder().use(controllers));
         
    vertx.createHttpServer(options).requestHandler(app).listen();
 
