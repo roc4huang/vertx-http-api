@@ -1,22 +1,8 @@
 package com.spriet2000.vertx.http.api.controllers.impl;
 
-import com.spriet2000.vertx.http.api.activation.Activator;
+import com.spriet2000.vertx.http.api.controllers.Controller;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.ArrayList;
 
-public class ControllerRegistry {
-
-    HashMap<Activator, Map<Method, List<Annotation>>> registry;
-
-    public ControllerRegistry() {
-        registry = new HashMap<>();
-    }
-
-    public HashMap<Activator, Map<Method, List<Annotation>>> get() {
-        return registry;
-    }
+public class ControllerRegistry extends ArrayList<Class<Controller>> {
 }

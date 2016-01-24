@@ -1,18 +1,9 @@
 package com.spriet2000.vertx.http.api.routing.impl;
 
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binders.method.MethodInfo;
 
 import java.util.HashMap;
 
-public class RouteRegistry {
+public class RouteRegistry extends HashMap<RouteInfo, MethodInfo> {
 
-    HashMap<RouteInfo, MethodInfo> registry;
-
-    public RouteRegistry() {
-        registry = new HashMap<>();
-    }
-
-    public HashMap<RouteInfo, MethodInfo> get() {
-        return registry;
-    }
 }

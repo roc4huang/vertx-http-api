@@ -1,23 +1,26 @@
 package com.spriet2000.vertx.http.api.activation;
 
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.method.Parameters;
-import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
-import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
-import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
-import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
-import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
-import com.spriet2000.vertx.http.api.binding.value.Value;
+import com.spriet2000.vertx.http.api.binders.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binders.method.Parameters;
+import com.spriet2000.vertx.http.api.binders.method.ParametersBinder;
+import com.spriet2000.vertx.http.api.binders.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binders.parameter.FromCookie;
+import com.spriet2000.vertx.http.api.binders.parameter.FromQuery;
+import com.spriet2000.vertx.http.api.binders.parameter.Parameter;
+import com.spriet2000.vertx.http.api.binders.value.Value;
 import com.spriet2000.vertx.http.api.controllers.Controller;
-import com.spriet2000.vertx.http.api.routing.RoutingContext;
+import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerRequest;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
+import static com.spriet2000.vertx.http.api.reflection.MethodAnalyzer.toMethodInfo;
 import static io.vertx.core.http.HttpHeaders.COOKIE;
 import static org.junit.Assert.assertEquals;
 
@@ -26,14 +29,17 @@ public class ParametersBinderTests {
     @Test
     public void testParametersValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
-        RoutingContext context = new RoutingContext(request);
-        context.parameters().add("greeting", "hello1");
-        context.parameters().add("to", "world1");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("greeting", "hello1");
+        parameters.put("to", "world1");
+
+        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
+        RouteContext context = new RouteContext(null, null, request, parameters);
+
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
 
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
-        MethodInfo info = new MethodInfo(method);
+        MethodInfo info = toMethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
         Value[] arguments = new Value[info.parameters().length];
@@ -46,14 +52,17 @@ public class ParametersBinderTests {
     @Test
     public void testQueryValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
-        RoutingContext context = new RoutingContext(request);
-        context.parameters().add("greeting", "hello1");
-        context.parameters().add("to", "world1");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("greeting", "hello1");
+        parameters.put("to", "world1");
+
+        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
+        RouteContext context = new RouteContext(null, null, request, parameters);
+
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
 
         Method method = ControllerImpl.class.getMethod("method2", String.class, String.class);
-        MethodInfo info = new MethodInfo(method);
+        MethodInfo info = toMethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
         Value[] arguments = new Value[info.parameters().length];
@@ -66,14 +75,17 @@ public class ParametersBinderTests {
     @Test
     public void testCookieValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
-        RoutingContext context = new RoutingContext(request);
-        context.parameters().add("greeting", "hello1");
-        context.parameters().add("to", "world1");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("greeting", "hello1");
+        parameters.put("to", "world1");
+
+        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
+        RouteContext context = new RouteContext(null, null, request, parameters);
+
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
 
         Method method = ControllerImpl.class.getMethod("method3", String.class, String.class);
-        MethodInfo info = new MethodInfo(method);
+        MethodInfo info = toMethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
         Value[] arguments = new Value[info.parameters().length];
@@ -86,12 +98,14 @@ public class ParametersBinderTests {
     @Test
     public void testParametersConvertedIntValue() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
 
-        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/");
-        RoutingContext context = new RoutingContext(request);
-        context.parameters().add("times", "20");
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put("times", "20");
 
-        Method method = ControllerImpl.class.getMethod("method4", int.class );
-        MethodInfo info = new MethodInfo(method);
+        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/");
+        RouteContext context = new RouteContext(null, null, request, parameters);
+
+        Method method = ControllerImpl.class.getMethod("method4", int.class);
+        MethodInfo info = toMethodInfo(method);
         ParametersBinder binder = info.parametersBinder();
 
         Value[] arguments = new Value[info.parameters().length];

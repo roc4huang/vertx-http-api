@@ -7,7 +7,7 @@ public class RouteInfo {
     private final Route route;
     private final HttpMethod httpMethod;
 
-    public RouteInfo(Route route, HttpMethod httpMethod) {
+    public RouteInfo(String name, Route route, HttpMethod httpMethod) {
 
         this.route = route;
         this.httpMethod = httpMethod;

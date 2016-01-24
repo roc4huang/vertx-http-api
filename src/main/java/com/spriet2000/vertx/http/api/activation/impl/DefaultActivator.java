@@ -1,12 +1,12 @@
 package com.spriet2000.vertx.http.api.activation.impl;
 
 import com.spriet2000.vertx.http.api.activation.Activator;
-import com.spriet2000.vertx.http.api.activation.Factory;
-import com.spriet2000.vertx.http.api.helpers.AnnotationsHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
+
+import static com.spriet2000.vertx.http.api.reflection.FactoryScanner.findFactory;
 
 
 public class DefaultActivator implements Activator {
@@ -24,7 +24,7 @@ public class DefaultActivator implements Activator {
         if (activator != null) {
             return activator.get();
         }
-        Method factory = AnnotationsHelper.findFirstMethodWithAnnotation(type, Factory.class);
+        Method factory = findFactory(type);
         if (factory == null) {
             this.activator = () -> {
                 try {

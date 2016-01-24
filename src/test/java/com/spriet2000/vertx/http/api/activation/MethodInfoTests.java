@@ -1,21 +1,22 @@
 package com.spriet2000.vertx.http.api.activation;
 
 
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.method.MethodInvoke;
-import com.spriet2000.vertx.http.api.binding.method.Parameters;
-import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
-import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
-import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
-import com.spriet2000.vertx.http.api.binding.value.Value;
+import com.spriet2000.vertx.http.api.binders.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binders.method.MethodInvoke;
+import com.spriet2000.vertx.http.api.binders.method.Parameters;
+import com.spriet2000.vertx.http.api.binders.method.ParametersBinder;
+import com.spriet2000.vertx.http.api.binders.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binders.parameter.Parameter;
+import com.spriet2000.vertx.http.api.binders.value.Value;
 import com.spriet2000.vertx.http.api.controllers.Controller;
-import com.spriet2000.vertx.http.api.routing.RoutingContext;
+import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
+import static com.spriet2000.vertx.http.api.reflection.MethodAnalyzer.toMethodInfo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -24,7 +25,7 @@ public class MethodInfoTests {
     @Test
     public void testMethodInfoNoneParamsWithoutAttributes() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = ControllerImpl.class.getMethod("noneParamsWithoutAttributes");
-        MethodInfo methodInfo = new MethodInfo(method);
+        MethodInfo methodInfo = toMethodInfo(method);
 
         assertEquals(0, methodInfo.parameters().length);
         assertEquals(ControllerImpl.class, methodInfo.getDeclaringClassActivator().newInstance().getClass());
@@ -35,8 +36,7 @@ public class MethodInfoTests {
     @Test
     public void testMethodInfoParamsWithParameterName() throws NoSuchMethodException {
         Method method = ControllerImpl.class.getMethod("oneParamsWithoutAttributes", String.class);
-        MethodInfo methodInfo = new MethodInfo(method);
-
+        MethodInfo methodInfo = toMethodInfo(method);
         assertEquals(1, methodInfo.parameters().length);
         assertEquals("arg0", methodInfo.parameters()[0].name());
         assertEquals(DefaultParametersBinder.class.getName(),
@@ -46,7 +46,7 @@ public class MethodInfoTests {
     @Test
     public void testMethodInfoWithCustomAttributes() throws NoSuchMethodException {
         Method method = ControllerImpl.class.getMethod("customAttributes", String.class);
-        MethodInfo methodInfo = new MethodInfo(method);
+        MethodInfo methodInfo = toMethodInfo(method);
 
         assertEquals(1, methodInfo.parameters().length);
         assertEquals("test", methodInfo.parameters()[0].name());
@@ -57,7 +57,7 @@ public class MethodInfoTests {
     @Test
     public void testMethodInvoke1() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
-        MethodInfo methodInfo = new MethodInfo(method);
+        MethodInfo methodInfo = toMethodInfo(method);
 
         MethodInvoke invoke = new MethodInvoke(methodInfo);
         Object result = invoke.invoke("hello", "world");
@@ -95,7 +95,7 @@ public class MethodInfoTests {
     public static class CustomParametersBinder implements ParametersBinder {
 
         @Override
-        public void bind(RoutingContext context, MethodInfo methodInfo, Value... arguments) {
+        public void bind(RouteContext context, MethodInfo methodInfo, Value... arguments) {
 
         }
     }
