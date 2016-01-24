@@ -1,7 +1,7 @@
-package com.spriet2000.vertx.http.api.binders.method;
+package com.spriet2000.vertx.http.api.binding.method;
 
-import com.spriet2000.vertx.http.api.binders.method.impl.DefaultParametersBinder;
-import com.spriet2000.vertx.http.api.binders.value.Value;
+import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.value.Value;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 
 public interface ParametersBinder {

@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.binders.value;
+package com.spriet2000.vertx.http.api.binding.value;
 
 public class Converter {
 

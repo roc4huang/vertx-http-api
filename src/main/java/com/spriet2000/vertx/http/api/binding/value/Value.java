@@ -1,6 +1,6 @@
-package com.spriet2000.vertx.http.api.binders.value;
+package com.spriet2000.vertx.http.api.binding.value;
 
-import static com.spriet2000.vertx.http.api.binders.value.Converter.convert;
+import static com.spriet2000.vertx.http.api.binding.value.Converter.convert;
 
 public final class Value {
 

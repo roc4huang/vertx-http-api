@@ -1,16 +1,16 @@
-package com.spriet2000.vertx.http.api.binders.method.impl;
+package com.spriet2000.vertx.http.api.binding.method.impl;
 
 import com.spriet2000.vertx.http.api.activation.Factory;
-import com.spriet2000.vertx.http.api.binders.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binders.method.ParametersBinder;
-import com.spriet2000.vertx.http.api.binders.parameter.ParameterInfo;
-import com.spriet2000.vertx.http.api.binders.value.Value;
-import com.spriet2000.vertx.http.api.binders.value.ValueBinder;
+import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
+import com.spriet2000.vertx.http.api.binding.value.Value;
+import com.spriet2000.vertx.http.api.binding.value.ValueBinder;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 
 import java.util.function.Supplier;
 
-import static com.spriet2000.vertx.http.api.binders.value.ValueBinder.newValueBinder;
+import static com.spriet2000.vertx.http.api.binding.value.ValueBinder.newValueBinder;
 
 public class DefaultParametersBinder implements ParametersBinder {
 

@@ -1,9 +1,9 @@
 package com.spriet2000.vertx.http.api.reflection;
 
-import com.spriet2000.vertx.http.api.binders.parameter.From;
-import com.spriet2000.vertx.http.api.binders.parameter.FromCookie;
-import com.spriet2000.vertx.http.api.binders.parameter.FromQuery;
-import com.spriet2000.vertx.http.api.binders.parameter.ParameterInfo;
+import com.spriet2000.vertx.http.api.binding.parameter.From;
+import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
+import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
+import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 
 import java.lang.reflect.Parameter;
 
@@ -16,9 +16,9 @@ public class ParameterAnalyzer {
     }
 
     private static String getName(Parameter parameter) {
-        com.spriet2000.vertx.http.api.binders.parameter.Parameter namedParameter =
+        com.spriet2000.vertx.http.api.binding.parameter.Parameter namedParameter =
                 findFirstAnnotation(parameter.getAnnotations(),
-                        com.spriet2000.vertx.http.api.binders.parameter.Parameter.class);
+                        com.spriet2000.vertx.http.api.binding.parameter.Parameter.class);
 
         if (namedParameter == null) {
             return parameter.getName();

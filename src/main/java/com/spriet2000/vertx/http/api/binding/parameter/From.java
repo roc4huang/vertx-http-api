@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.binders.parameter;
+package com.spriet2000.vertx.http.api.binding.parameter;
 
 
 public enum From {

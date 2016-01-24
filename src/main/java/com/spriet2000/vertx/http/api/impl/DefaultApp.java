@@ -31,9 +31,7 @@ public class DefaultApp implements App {
     }
 
     private Handler<HttpServerRequest> handler() {
-        return builder.build(e -> {
-            // todo
-        });
+        return builder.build();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.binders.method;
+package com.spriet2000.vertx.http.api.binding.method;
 
 
 import com.spriet2000.vertx.http.api.activation.Activator;

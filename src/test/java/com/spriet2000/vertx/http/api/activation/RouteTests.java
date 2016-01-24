@@ -1,6 +1,6 @@
 package com.spriet2000.vertx.http.api.activation;
 
-import com.spriet2000.vertx.http.api.binders.parameter.Parameter;
+import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.Route;
 import org.junit.Test;

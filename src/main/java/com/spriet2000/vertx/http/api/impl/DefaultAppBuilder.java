@@ -1,11 +1,11 @@
 package com.spriet2000.vertx.http.api.impl;
 
 import com.spriet2000.vertx.http.api.AppBuilder;
+import com.spriet2000.vertx.http.api.AppHandler;
 import com.spriet2000.vertx.http.api.Router;
-import com.spriet2000.vertx.http.api.binders.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
-import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import com.spriet2000.vertx.http.api.routing.impl.RouteInfo;
 import com.spriet2000.vertx.http.api.routing.impl.RouteRegistry;
 import io.vertx.core.Handler;
@@ -22,9 +22,10 @@ public class DefaultAppBuilder implements AppBuilder {
 
     static Logger logger = LoggerFactory.getLogger(DefaultAppBuilder.class);
 
-    private Router mapping;
+    private Router router;
     private RouteRegistry routeRegistry;
     private ControllerRegistry controllerRegistry;
+    private AppHandler appHandler;
 
     @Override
     public RouteRegistry routes() {
@@ -32,19 +33,23 @@ public class DefaultAppBuilder implements AppBuilder {
     }
 
     @Override
-    public AppBuilder useRouter(Router mapping) {
-        this.mapping = mapping;
+    public AppBuilder useRouter(Router router) {
+        this.router = router;
         return this;
     }
 
     public AppBuilder useControllers(ControllerRegistry registry) {
-
         this.controllerRegistry = registry;
         return this;
     }
 
+    public AppBuilder useHandler(AppHandler appHandler) {
+        this.appHandler = appHandler;
+        return this;
+    }
+
     @Override
-    public Handler<HttpServerRequest> build(Handler<RouteContext> handler) {
+    public Handler<HttpServerRequest> build() {
 
         RouteRegistry routeRegistry = new RouteRegistry();
 
@@ -58,7 +63,7 @@ public class DefaultAppBuilder implements AppBuilder {
                 if (routeInfo == null) {
                     continue;
                 }
-                logger.info(String.format("Found route %s", routeInfo));
+                logger.info(String.format("Found accept %s", routeInfo));
                 MethodInfo methodInfo = toMethodInfo(method);
                 routeRegistry.put(routeInfo, methodInfo);
             }
@@ -66,6 +71,14 @@ public class DefaultAppBuilder implements AppBuilder {
 
         logger.info("Scanning for controllers completed");
 
-        return mapping.map(routeRegistry, handler);
+        if (router == null) {
+            router = new DefaultRouterMapping();
+        }
+
+        if (appHandler == null) {
+            appHandler = new DefaultHandler();
+        }
+
+        return router.accept(routeRegistry, appHandler);
     }
 }

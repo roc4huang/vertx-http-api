@@ -1,11 +1,11 @@
 package com.spriet2000.vertx.http.api.reflection;
 
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
-import com.spriet2000.vertx.http.api.binders.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binders.method.Parameters;
-import com.spriet2000.vertx.http.api.binders.method.ParametersBinder;
-import com.spriet2000.vertx.http.api.binders.method.impl.DefaultParametersBinder;
-import com.spriet2000.vertx.http.api.binders.parameter.ParameterInfo;
+import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.method.Parameters;
+import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 import com.spriet2000.vertx.http.api.routing.*;
 import com.spriet2000.vertx.http.api.routing.impl.RouteInfo;
 import io.vertx.core.http.HttpMethod;
