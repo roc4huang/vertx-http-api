@@ -11,7 +11,7 @@ At verticle start the verticle scans for controller instances on a given path an
 
 ```
 
-public void start() throws Exception {
+public void start() {
 
         Controllers controllers = 
                 scanClassPaths("com.spriet2000.vertx.http.api.example");
