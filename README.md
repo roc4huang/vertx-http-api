@@ -28,8 +28,6 @@ public void start() throws Exception {
 
 ### Controller 
 
-The @Parameters is optional. It demonstrates the parameters binders.
-
 The @Factory is a factory method for the controller. A controller instance is made for every request.
 
 The @FromQuery specifies location for an argument
@@ -51,8 +49,7 @@ The route names should be unique and can for example be to used to generate urls
 
         @Get
         @Route(name = ROUTE_ORDER, path = "/order/:beer")
-        @Parameters(binder = DefaultParametersBinder.class)
-        public String order(@Parameter(name = "beer") String beer,
+        public String order(@Parameter(name = ":beer") String beer,
                             @FromQuery @Parameter(name = "times") int times) {
             return String.format("Order %s %s", times, beer);
         }
