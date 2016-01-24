@@ -12,7 +12,6 @@ public class DefaultApp implements App {
     private Handler<HttpServerRequest> handler;
 
     public DefaultApp(Vertx vertx) {
-
         this.vertx = vertx;
     }
 

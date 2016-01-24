@@ -5,7 +5,7 @@ import com.spriet2000.vertx.http.api.AppHandler;
 import com.spriet2000.vertx.http.api.Router;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.controllers.Controller;
-import com.spriet2000.vertx.http.api.controllers.impl.ControllerRegistry;
+import com.spriet2000.vertx.http.api.controllers.impl.Controllers;
 import com.spriet2000.vertx.http.api.routing.impl.RouteInfo;
 import com.spriet2000.vertx.http.api.routing.impl.RouteRegistry;
 import io.vertx.core.Handler;
@@ -24,7 +24,7 @@ public class DefaultAppBuilder implements AppBuilder {
 
     private Router router;
     private RouteRegistry routeRegistry;
-    private ControllerRegistry controllerRegistry;
+    private Controllers controllerRegistry;
     private AppHandler appHandler;
 
     @Override
@@ -33,17 +33,17 @@ public class DefaultAppBuilder implements AppBuilder {
     }
 
     @Override
-    public AppBuilder useRouter(Router router) {
+    public AppBuilder use(Router router) {
         this.router = router;
         return this;
     }
 
-    public AppBuilder useControllers(ControllerRegistry registry) {
+    public AppBuilder use(Controllers registry) {
         this.controllerRegistry = registry;
         return this;
     }
 
-    public AppBuilder useHandler(AppHandler appHandler) {
+    public AppBuilder use(AppHandler appHandler) {
         this.appHandler = appHandler;
         return this;
     }

@@ -4,5 +4,5 @@ import com.spriet2000.vertx.http.api.controllers.Controller;
 
 import java.util.ArrayList;
 
-public class ControllerRegistry extends ArrayList<Class<Controller>> {
+public class Controllers extends ArrayList<Class<Controller>> {
 }
