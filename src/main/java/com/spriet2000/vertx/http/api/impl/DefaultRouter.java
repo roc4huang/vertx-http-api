@@ -6,7 +6,7 @@ import com.spriet2000.vertx.http.api.Router;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import com.spriet2000.vertx.http.api.routing.impl.RouteInfo;
-import com.spriet2000.vertx.http.api.routing.impl.RouteRegistry;
+import com.spriet2000.vertx.http.api.routing.impl.Routes;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.logging.Logger;
@@ -15,13 +15,13 @@ import io.vertx.core.logging.LoggerFactory;
 import java.util.Map;
 
 
-public class DefaultRouterMapping implements Router {
+public class DefaultRouter implements Router {
 
-    static Logger logger = LoggerFactory.getLogger(DefaultRouterMapping.class);
+    static Logger logger = LoggerFactory.getLogger(DefaultRouter.class);
 
 
     @Override
-    public Handler<HttpServerRequest> accept(RouteRegistry routeRegistry, AppHandler appHandler) {
+    public Handler<HttpServerRequest> accept(Routes routeRegistry, AppHandler appHandler) {
 
         logger.info("Mapping routes");
 

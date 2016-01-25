@@ -1,11 +1,11 @@
 package com.spriet2000.vertx.http.api;
 
 
-import com.spriet2000.vertx.http.api.routing.impl.RouteRegistry;
+import com.spriet2000.vertx.http.api.routing.impl.Routes;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerRequest;
 
 public interface Router {
 
-    Handler<HttpServerRequest> accept(RouteRegistry routeRegistry, AppHandler handler);
+    Handler<HttpServerRequest> accept(Routes routeRegistry, AppHandler handler);
 }

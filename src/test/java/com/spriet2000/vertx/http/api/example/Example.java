@@ -1,7 +1,6 @@
 package com.spriet2000.vertx.http.api.example;
 
 import com.spriet2000.vertx.http.api.App;
-import com.spriet2000.vertx.http.api.AppBuilder;
 import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
@@ -10,9 +9,7 @@ import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.controllers.impl.Controllers;
 import com.spriet2000.vertx.http.api.routing.Get;
-import com.spriet2000.vertx.http.api.routing.Post;
 import com.spriet2000.vertx.http.api.routing.Route;
-import io.vertx.core.cli.annotations.Name;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.test.core.VertxTestBase;
 import org.junit.Test;
@@ -20,7 +17,6 @@ import org.junit.Test;
 import java.util.function.Supplier;
 
 import static com.spriet2000.vertx.http.api.App.webApp;
-import static com.spriet2000.vertx.http.api.AppBuilder.builder;
 import static com.spriet2000.vertx.http.api.reflection.ControllerScanner.scanClassPaths;
 
 public class Example extends VertxTestBase {
@@ -32,11 +28,11 @@ public class Example extends VertxTestBase {
         Controllers controllers =
                 scanClassPaths("com.spriet2000.vertx.http.api.example");
 
-        App app = webApp(vertx).configure(
-                builder().use(controllers));
+        App app = webApp(vertx).configure(a -> {
+            a.use(controllers);
+        });
 
-        vertx.createHttpServer(options)
-                .requestHandler(app)
+        vertx.createHttpServer(options).requestHandler(app)
                 .listen();
     }
 
