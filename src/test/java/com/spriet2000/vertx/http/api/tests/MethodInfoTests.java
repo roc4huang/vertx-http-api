@@ -62,10 +62,10 @@ public class MethodInfoTests {
         MethodInfo methodInfo = toMethodInfo(method);
 
         MethodInvoker invoke = new DefaultMethodInvoker(methodInfo);
-        Object result = invoke.invoke(new Value("hello", String.class), new Value("world", String.class));
+        Value result = invoke.invoke(new Value("hello", String.class), new Value("world", String.class));
 
         assertNotNull(result);
-        assertEquals("hello world", result);
+        assertEquals("hello world", result.getValue());
     }
 
 
