@@ -10,5 +10,5 @@ public interface ParametersBinder {
         return new DefaultParametersBinder();
     }
 
-    void bind(RouteContext context, MethodInfo methodInfo, Value[] arguments);
+    void bind(RouteContext context, Value[] arguments);
 }

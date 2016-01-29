@@ -28,7 +28,8 @@ public class RouteContext {
         return parameters;
     }
 
-    public MethodInfo method() {
+    public MethodInfo methodInfo() {
         return methodInfo;
     }
+
 }

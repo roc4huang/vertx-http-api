@@ -53,8 +53,8 @@ public class Example extends AbstractVerticle {
         @Route(name = ROUTE_ORDER, path = "/order/:beer")
         @Parameters(binder = DefaultParametersBinder.class)
         public String order(@Parameter(name = "beer") String beer,
-                            @FromQuery @Parameter(name = "times") int times) {
-            return String.format("Order %s %s", times, beer);
+                            @FromQuery @Parameter(name = "amount") int amount) {
+            return String.format("Order %s %s", amount, beer);
         }
 
     }

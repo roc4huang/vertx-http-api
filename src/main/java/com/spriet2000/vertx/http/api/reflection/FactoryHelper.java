@@ -5,9 +5,9 @@ import com.spriet2000.vertx.http.api.activation.Factory;
 import java.lang.reflect.Method;
 
 
-public class FactoryScanner {
+public class FactoryHelper {
 
     public static Method findFactory(Class<?> clazz) {
-        return AnnotationScanner.findFirstMethodWithAnnotation(clazz, Factory.class);
+        return AnnotationHelper.findFirstMethodWithAnnotation(clazz, Factory.class);
     }
 }

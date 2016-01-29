@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.List;
 
-public class AnnotationScanner {
+public class AnnotationHelper {
 
     static <T> T findFirstAnnotation(List<Annotation> annotations, Class<T> attributeType) {
         for (Annotation annotation : annotations) {

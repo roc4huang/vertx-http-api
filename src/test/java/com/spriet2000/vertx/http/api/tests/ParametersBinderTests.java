@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import static com.spriet2000.vertx.http.api.reflection.MethodAnalyzer.toMethodInfo;
+import static com.spriet2000.vertx.http.api.reflection.MethodInfoHelper.toMethodInfo;
 import static io.vertx.core.http.HttpHeaders.COOKIE;
 import static org.junit.Assert.assertEquals;
 
@@ -36,16 +36,16 @@ public class ParametersBinderTests {
         parameters.put("to", "world1");
 
         HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
-        RouteContext context = new RouteContext(null, null, request, parameters);
-
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
 
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
         MethodInfo info = toMethodInfo(method);
-        ParametersBinder binder = info.parametersBinder();
 
+        RouteContext context = new RouteContext(null, info, request, parameters);
+
+        ParametersBinder binder = info.parametersBinder();
         Value[] arguments = new Value[info.parameters().length];
-        binder.bind(context, info, arguments);
+        binder.bind(context, arguments);
 
         assertEquals("hello1", arguments[0].getValue());
         assertEquals("world1", arguments[1].getValue());
@@ -59,16 +59,16 @@ public class ParametersBinderTests {
         parameters.put("to", "world1");
 
         HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
-        RouteContext context = new RouteContext(null, null, request, parameters);
-
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
 
         Method method = ControllerImpl.class.getMethod("method2", String.class, String.class);
         MethodInfo info = toMethodInfo(method);
-        ParametersBinder binder = info.parametersBinder();
 
+        RouteContext context = new RouteContext(null, info, request, parameters);
+
+        ParametersBinder binder = info.parametersBinder();
         Value[] arguments = new Value[info.parameters().length];
-        binder.bind(context, info, arguments);
+        binder.bind(context, arguments);
 
         assertEquals("hello2", arguments[0].getValue());
         assertEquals("world2", arguments[1].getValue());
@@ -82,16 +82,16 @@ public class ParametersBinderTests {
         parameters.put("to", "world1");
 
         HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
-        RouteContext context = new RouteContext(null, null, request, parameters);
-
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
 
         Method method = ControllerImpl.class.getMethod("method3", String.class, String.class);
         MethodInfo info = toMethodInfo(method);
-        ParametersBinder binder = info.parametersBinder();
 
+        RouteContext context = new RouteContext(null, info, request, parameters);
+
+        ParametersBinder binder = info.parametersBinder();
         Value[] arguments = new Value[info.parameters().length];
-        binder.bind(context, info, arguments);
+        binder.bind(context, arguments);
 
         assertEquals("hello3", arguments[0].getValue());
         assertEquals("world3", arguments[1].getValue());
@@ -104,14 +104,15 @@ public class ParametersBinderTests {
         parameters.put("times", "20");
 
         HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/");
-        RouteContext context = new RouteContext(null, null, request, parameters);
 
         Method method = ControllerImpl.class.getMethod("method4", int.class);
         MethodInfo info = toMethodInfo(method);
-        ParametersBinder binder = info.parametersBinder();
 
+        RouteContext context = new RouteContext(null, info, request, parameters);
+
+        ParametersBinder binder = info.parametersBinder();
         Value[] arguments = new Value[info.parameters().length];
-        binder.bind(context, info, arguments);
+        binder.bind(context, arguments);
 
         assertEquals(20, arguments[0].getValue());
     }
@@ -119,7 +120,7 @@ public class ParametersBinderTests {
     public static class ControllerImpl extends Controller {
 
         @Factory
-        public static Supplier factory() {
+        public static Supplier supplier() {
             return ControllerImpl::new;
         }
 

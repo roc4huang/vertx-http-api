@@ -20,11 +20,12 @@ public class DefaultParametersBinder implements ParametersBinder {
     }
 
     @Override
-    public void bind(RouteContext context, MethodInfo methodInfo, Value... values) {
-        ParameterInfo[] parameters = methodInfo.parameters();
+    public void bind(RouteContext context,  Value... values) {
+
+        ParameterInfo[] parameters = context.methodInfo().parameters();
         for (int i = 0; i < parameters.length; i++) {
             ValueBinder valueBinder = newValueBinder();
-            values[i] = valueBinder.bind(context, methodInfo, parameters[i]);
+            values[i] = valueBinder.bind(context, context.methodInfo(), parameters[i]);
         }
     }
 }

@@ -6,7 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
-import static com.spriet2000.vertx.http.api.reflection.FactoryScanner.findFactory;
+import static com.spriet2000.vertx.http.api.reflection.FactoryHelper.findFactory;
 
 
 public class DefaultActivator implements Activator {

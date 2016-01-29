@@ -8,28 +8,28 @@ import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.impl.RouteInfo;
 import com.spriet2000.vertx.http.api.routing.impl.Routes;
 import io.vertx.core.Handler;
-import io.vertx.core.http.HttpServer;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 
 import java.lang.reflect.Method;
 
-import static com.spriet2000.vertx.http.api.reflection.MethodAnalyzer.toMethodInfo;
-import static com.spriet2000.vertx.http.api.reflection.MethodAnalyzer.toRouteInfo;
+import static com.spriet2000.vertx.http.api.reflection.MethodInfoHelper.toMethodInfo;
+import static com.spriet2000.vertx.http.api.reflection.RouteInfoHelper.toRouteInfo;
+
 
 public class DefaultApp implements App {
 
     static Logger logger = LoggerFactory.getLogger(DefaultApp.class);
 
     private final Routes routes = new Routes();
+
     private Handler<HttpServerRequest> handler;
     private AppConfiguration configuration;
 
 
-
     @Override
-    public App configure(AppBuilder builder) {
+    public App builder(AppBuilder builder) {
         configuration = builder.build();
         return this;
     }

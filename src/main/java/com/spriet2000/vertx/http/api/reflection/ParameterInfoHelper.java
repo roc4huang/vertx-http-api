@@ -7,9 +7,9 @@ import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 
 import java.lang.reflect.Parameter;
 
-import static com.spriet2000.vertx.http.api.reflection.AnnotationScanner.findFirstAnnotation;
+import static com.spriet2000.vertx.http.api.reflection.AnnotationHelper.findFirstAnnotation;
 
-public class ParameterAnalyzer {
+public class ParameterInfoHelper {
 
     public static ParameterInfo toParameterInfo(Parameter parameter) {
         return new ParameterInfo(getName(parameter), findFrom(parameter), parameter);

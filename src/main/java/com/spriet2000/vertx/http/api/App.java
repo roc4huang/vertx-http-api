@@ -7,10 +7,10 @@ import io.vertx.core.http.HttpServerRequest;
 public interface App extends Handler<HttpServerRequest> {
 
     static App create(AppBuilder builder) {
-        return new DefaultApp().configure(builder);
+        return new DefaultApp().builder(builder);
     }
 
-    App configure(AppBuilder builder);
+    App builder(AppBuilder builder);
 
     void accept(HttpServerRequest request);
 }

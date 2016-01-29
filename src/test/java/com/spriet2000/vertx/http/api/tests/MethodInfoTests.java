@@ -3,7 +3,7 @@ package com.spriet2000.vertx.http.api.tests;
 
 import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.method.MethodInvoke;
+import com.spriet2000.vertx.http.api.binding.method.MethodInvoker;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
@@ -17,7 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.function.Supplier;
 
-import static com.spriet2000.vertx.http.api.reflection.MethodAnalyzer.toMethodInfo;
+import static com.spriet2000.vertx.http.api.reflection.MethodInfoHelper.toMethodInfo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -60,8 +60,8 @@ public class MethodInfoTests {
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
         MethodInfo methodInfo = toMethodInfo(method);
 
-        MethodInvoke invoke = new MethodInvoke(methodInfo);
-        Object result = invoke.invoke("hello", "world");
+        MethodInvoker invoke = new MethodInvoker(methodInfo);
+        Object result = invoke.invoke(new Value("hello", String.class), new Value("world", String.class));
 
         assertNotNull(result);
         assertEquals("hello world", result);
@@ -96,7 +96,7 @@ public class MethodInfoTests {
     public static class CustomParametersBinder implements ParametersBinder {
 
         @Override
-        public void bind(RouteContext context, MethodInfo methodInfo, Value... arguments) {
+        public void bind(RouteContext context, Value... arguments) {
 
         }
     }

@@ -12,11 +12,11 @@ public final class MethodInfo {
     private final ParameterInfo[] parameters;
     private final ParametersBinder parametersBinder;
 
-    public MethodInfo(String name, Method method, ParametersBinder parametersBinder, ParameterInfo[] parameters) {
+    public MethodInfo(String name, Method method, ParametersBinder parametersBinder, ParameterInfo[] parameterInfos) {
         this.name = name;
         this.method = method;
         this.parametersBinder = parametersBinder;
-        this.parameters = parameters;
+        this.parameters = parameterInfos;
     }
 
     public Method getMethod() {
