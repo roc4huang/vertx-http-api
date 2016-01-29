@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.activation;
+package com.spriet2000.vertx.http.api;
 
 import io.vertx.core.Handler;
 import io.vertx.core.MultiMap;
@@ -12,7 +12,7 @@ import javax.security.cert.X509Certificate;
 
 import static io.vertx.core.MultiMap.caseInsensitiveMultiMap;
 
-public class TestRequest implements HttpServerRequest {
+public class TestHttpServerRequest implements HttpServerRequest {
 
     private final HttpMethod method;
     private final String path;
@@ -20,7 +20,7 @@ public class TestRequest implements HttpServerRequest {
 
     private MultiMap headers;
 
-    public TestRequest(HttpMethod method, String path) {
+    public TestHttpServerRequest(HttpMethod method, String path) {
 
         this.method = method;
         this.path = path;

@@ -1,5 +1,6 @@
-package com.spriet2000.vertx.http.api.activation;
+package com.spriet2000.vertx.http.api;
 
+import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.Route;

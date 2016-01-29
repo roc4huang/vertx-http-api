@@ -1,5 +1,6 @@
-package com.spriet2000.vertx.http.api.activation;
+package com.spriet2000.vertx.http.api;
 
+import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
@@ -33,7 +34,7 @@ public class ParametersBinderTests {
         parameters.put("greeting", "hello1");
         parameters.put("to", "world1");
 
-        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
+        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
         RouteContext context = new RouteContext(null, null, request, parameters);
 
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
@@ -56,7 +57,7 @@ public class ParametersBinderTests {
         parameters.put("greeting", "hello1");
         parameters.put("to", "world1");
 
-        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
+        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
         RouteContext context = new RouteContext(null, null, request, parameters);
 
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
@@ -79,7 +80,7 @@ public class ParametersBinderTests {
         parameters.put("greeting", "hello1");
         parameters.put("to", "world1");
 
-        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
+        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/hello?greeting=hello2&to=world2");
         RouteContext context = new RouteContext(null, null, request, parameters);
 
         request.headers().add(COOKIE, "greeting=hello3; to=world3");
@@ -101,7 +102,7 @@ public class ParametersBinderTests {
         Map<String, String> parameters = new HashMap<>();
         parameters.put("times", "20");
 
-        HttpServerRequest request = new TestRequest(HttpMethod.GET, "/");
+        HttpServerRequest request = new TestHttpServerRequest(HttpMethod.GET, "/");
         RouteContext context = new RouteContext(null, null, request, parameters);
 
         Method method = ControllerImpl.class.getMethod("method4", int.class);

@@ -1,38 +1,42 @@
 package com.spriet2000.vertx.http.api.example;
 
+import com.github.spriet2000.vertx.handlers.http.server.utils.Runner;
 import com.spriet2000.vertx.http.api.App;
+import com.spriet2000.vertx.http.api.AppBuilder;
 import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
 import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.controllers.Controller;
-import com.spriet2000.vertx.http.api.controllers.impl.Controllers;
+import com.spriet2000.vertx.http.api.controllers.Controllers;
+import com.spriet2000.vertx.http.api.controllers.impl.DefaultControllers;
 import com.spriet2000.vertx.http.api.routing.Get;
 import com.spriet2000.vertx.http.api.routing.Route;
+import io.vertx.core.AbstractVerticle;
+import io.vertx.core.VertxOptions;
 import io.vertx.core.http.HttpServerOptions;
-import io.vertx.test.core.VertxTestBase;
-import org.junit.Test;
 
 import java.util.function.Supplier;
 
-import static com.spriet2000.vertx.http.api.App.webApp;
-import static com.spriet2000.vertx.http.api.reflection.ControllerScanner.scanClassPaths;
+import static com.spriet2000.vertx.http.api.AppBuilder.builder;
+import static com.spriet2000.vertx.http.api.controllers.Controllers.controllers;
 
-public class Example extends VertxTestBase {
+public class Example extends AbstractVerticle {
 
     HttpServerOptions options = new HttpServerOptions().setPort(8080);
-    @Test
-    public void example(){
 
-        Controllers controllers =
-                scanClassPaths("com.spriet2000.vertx.http.api.example");
+    public static void main(String[] args) {
+        Runner.run(Example.class, new VertxOptions());
+    }
 
-        App app = webApp(vertx).configure(a -> {
-            a.use(controllers);
-        });
+    public void example() {
 
-        vertx.createHttpServer(options).requestHandler(app)
+        App app = App.create(builder(vertx)
+                .use(controllers().add(OrderController.class)));
+
+        vertx.createHttpServer(options)
+                .requestHandler(app)
                 .listen();
     }
 
@@ -54,5 +58,4 @@ public class Example extends VertxTestBase {
         }
 
     }
-
 }

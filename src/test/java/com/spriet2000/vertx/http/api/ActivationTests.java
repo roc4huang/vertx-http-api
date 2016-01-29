@@ -1,5 +1,6 @@
-package com.spriet2000.vertx.http.api.activation;
+package com.spriet2000.vertx.http.api;
 
+import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.activation.impl.DefaultActivator;
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class ActivationTests {
     public static class ClassWithFactoryImpl {
 
         @Factory
-        public static Supplier supply() {
+        public static Supplier factory() {
             return ClassWithFactoryImpl::new;
         }
 

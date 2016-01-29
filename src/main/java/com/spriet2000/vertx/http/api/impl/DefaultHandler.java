@@ -8,6 +8,6 @@ public class DefaultHandler implements AppHandler {
 
     @Override
     public void handle(RouteContext context) {
-
+        context.request().response().end();
     }
 }
