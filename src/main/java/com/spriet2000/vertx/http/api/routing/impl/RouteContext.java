@@ -10,6 +10,7 @@ public class RouteContext {
     private final MethodInfo methodInfo;
     private final Map<String, String> parameters;
     private HttpServerRequest request;
+    private Result resultValue;
 
     public RouteContext(RouteInfo routeInfo, MethodInfo value,
                         HttpServerRequest request, Map<String, String> parameters) {
@@ -30,6 +31,15 @@ public class RouteContext {
 
     public MethodInfo methodInfo() {
         return methodInfo;
+    }
+
+    public void result(Result result) {
+
+        this.resultValue = result;
+    }
+
+    public Result result() {
+        return resultValue;
     }
 
 }

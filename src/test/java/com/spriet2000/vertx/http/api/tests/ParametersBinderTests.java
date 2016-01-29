@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static com.spriet2000.vertx.http.api.binding.value.Converter.convert;
 import static com.spriet2000.vertx.http.api.reflection.MethodInfoHelper.toMethodInfo;
 import static io.vertx.core.http.HttpHeaders.COOKIE;
 import static org.junit.Assert.assertEquals;
@@ -47,8 +48,9 @@ public class ParametersBinderTests {
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
-        assertEquals("hello1", arguments[0].getValue());
-        assertEquals("world1", arguments[1].getValue());
+
+        assertEquals("hello1", convert(arguments[0].getValue(), arguments[0].getType()));
+        assertEquals("world1", convert(arguments[1].getValue(), arguments[1].getType()));
     }
 
     @Test
@@ -70,8 +72,8 @@ public class ParametersBinderTests {
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
-        assertEquals("hello2", arguments[0].getValue());
-        assertEquals("world2", arguments[1].getValue());
+        assertEquals("hello2", convert(arguments[0].getValue(), arguments[0].getType()));
+        assertEquals("world2", convert(arguments[1].getValue(), arguments[1].getType()));
     }
 
     @Test
@@ -93,8 +95,8 @@ public class ParametersBinderTests {
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
-        assertEquals("hello3", arguments[0].getValue());
-        assertEquals("world3", arguments[1].getValue());
+        assertEquals("hello3", convert(arguments[0].getValue(), arguments[0].getType()));
+        assertEquals("world3", convert(arguments[1].getValue(), arguments[1].getType()));
     }
 
     @Test
@@ -114,7 +116,7 @@ public class ParametersBinderTests {
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
-        assertEquals(20, arguments[0].getValue());
+        assertEquals(20, convert(arguments[0].getValue(), arguments[0].getType()));
     }
 
     public static class ControllerImpl extends Controller {

@@ -16,14 +16,14 @@ import static com.spriet2000.vertx.http.api.AppBuilder.builder;
 import static com.spriet2000.vertx.http.api.controllers.Controllers.controllers;
 
 
-public class RequestTest1 extends AppTestBase {
+public class OrderBeerTests extends AppTestBase {
 
     @Test
     public void orderBeerTest() throws Exception {
 
         app.builder(builder(vertx).use(controllers(OrderController.class)));
 
-        testRequest(HttpMethod.GET, "/order/beer?amount=10", 200, "OK", "Order 10 beer");
+        testRequest(HttpMethod.GET, "/order/beer?amount=10", 200, "OK", "\"Order 10 beer\"");
     }
 
     public static class OrderController extends Controller {

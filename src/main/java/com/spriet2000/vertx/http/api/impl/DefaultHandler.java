@@ -1,35 +1,27 @@
 package com.spriet2000.vertx.http.api.impl;
 
 
+import com.github.spriet2000.handlers.Handlers;
 import com.spriet2000.vertx.http.api.AppHandler;
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
-import com.spriet2000.vertx.http.api.binding.method.MethodInvoker;
-import com.spriet2000.vertx.http.api.binding.method.impl.DefaultMethodInvoker;
-import com.spriet2000.vertx.http.api.binding.value.Value;
+import com.spriet2000.vertx.http.api.handlers.impl.ErrorHandler;
+import com.spriet2000.vertx.http.api.handlers.impl.JsonResultHandler;
+import com.spriet2000.vertx.http.api.handlers.impl.MethodHandler;
+import com.spriet2000.vertx.http.api.handlers.impl.SuccessHandler;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.function.Consumer;
 
 public class DefaultHandler implements AppHandler {
 
+    private Consumer<RouteContext> consumer;
+
     @Override
     public void handle(RouteContext context) {
-
-        Value[] values = new Value[context.methodInfo().parameters().length];
-
-        MethodInfo methodInfo = context.methodInfo();
-        methodInfo.parametersBinder().bind(context, values);
-
-        Object result = null;
-
-        try {
-            MethodInvoker invoker = new DefaultMethodInvoker(methodInfo);
-            result = invoker.invoke(values);
-        } catch (InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
+        if (consumer == null) {
+            Handlers<RouteContext> handlers = new Handlers<>(
+                    new MethodHandler(), new JsonResultHandler());
+            consumer = handlers.apply(new ErrorHandler(), new SuccessHandler());
         }
-
-        assert result != null;
-        context.request().response().end(result.toString());
+        consumer.accept(context);
     }
 }

@@ -1,7 +1,5 @@
 package com.spriet2000.vertx.http.api.binding.value;
 
-import static com.spriet2000.vertx.http.api.binding.value.Converter.convert;
-
 public final class Value {
 
     private Object rawValue;
@@ -13,8 +11,11 @@ public final class Value {
         this.type = type;
     }
 
-    public Object getValue() {
-        return convert(type, rawValue);
+    public Class<?> getType() {
+        return type;
     }
 
+    public Object getValue() {
+        return rawValue;
+    }
 }

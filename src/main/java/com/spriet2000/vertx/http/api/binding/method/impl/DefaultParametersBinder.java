@@ -1,7 +1,6 @@
 package com.spriet2000.vertx.http.api.binding.method.impl;
 
 import com.spriet2000.vertx.http.api.activation.Factory;
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
 import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 import com.spriet2000.vertx.http.api.binding.value.Value;
@@ -20,7 +19,7 @@ public class DefaultParametersBinder implements ParametersBinder {
     }
 
     @Override
-    public void bind(RouteContext context,  Value... values) {
+    public void bind(RouteContext context, Value... values) {
 
         ParameterInfo[] parameters = context.methodInfo().parameters();
         for (int i = 0; i < parameters.length; i++) {

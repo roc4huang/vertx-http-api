@@ -7,6 +7,8 @@ import com.spriet2000.vertx.http.api.binding.value.Value;
 
 import java.lang.reflect.InvocationTargetException;
 
+import static com.spriet2000.vertx.http.api.binding.value.Converter.convert;
+
 
 public final class DefaultMethodInvoker implements MethodInvoker {
 
@@ -17,13 +19,13 @@ public final class DefaultMethodInvoker implements MethodInvoker {
     }
 
     @Override
-    public Object invoke(Value... parameters) throws InvocationTargetException, IllegalAccessException {
+    public Value invoke(Value... parameters) throws InvocationTargetException, IllegalAccessException {
         Object[] arguments = new Object[parameters.length];
         for (int i = 0, parametersLength = parameters.length; i < parametersLength; i++) {
-            arguments[i] = parameters[i].getValue();
+            arguments[i] = convert(parameters[i].getValue(), parameters[i].getType());
         }
-        return methodInfo.getMethod().invoke(methodInfo.getActivator().newInstance(), arguments);
+        return new Value(methodInfo.getMethod().invoke(methodInfo.getActivator().newInstance(), arguments),
+                methodInfo.getMethod().getReturnType());
     }
-
 
 }

@@ -11,7 +11,7 @@ public class DefaultControllers implements Controllers {
     private ArrayList<Class<? extends Controller>> controllers = new ArrayList<>();
 
     @SafeVarargs
-    public DefaultControllers(Class<? extends Controller>... controllers){
+    public DefaultControllers(Class<? extends Controller>... controllers) {
         Collections.addAll(this.controllers, controllers);
     }
 
