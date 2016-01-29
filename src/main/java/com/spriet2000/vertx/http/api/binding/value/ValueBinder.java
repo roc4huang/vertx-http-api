@@ -7,7 +7,7 @@ import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 
 public interface ValueBinder {
 
-    static ValueBinder newValueBinder() {
+    static ValueBinder valueBinder() {
         return new DefaultValueBinder();
     }
 

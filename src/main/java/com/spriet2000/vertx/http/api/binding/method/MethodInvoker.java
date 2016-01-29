@@ -10,5 +10,5 @@ public interface MethodInvoker {
         return new DefaultMethodInvoker(methodInfo);
     }
 
-    Value invoke(Value... parameters) throws InvocationTargetException, IllegalAccessException;
+    Value invoke(Value... values) throws InvocationTargetException, IllegalAccessException;
 }

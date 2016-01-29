@@ -19,10 +19,10 @@ public final class DefaultMethodInvoker implements MethodInvoker {
     }
 
     @Override
-    public Value invoke(Value... parameters) throws InvocationTargetException, IllegalAccessException {
-        Object[] arguments = new Object[parameters.length];
-        for (int i = 0, parametersLength = parameters.length; i < parametersLength; i++) {
-            arguments[i] = convert(parameters[i].getValue(), parameters[i].getType());
+    public Value invoke(Value... values) throws InvocationTargetException, IllegalAccessException {
+        Object[] arguments = new Object[values.length];
+        for (int i = 0, parametersLength = values.length; i < parametersLength; i++) {
+            arguments[i] = convert(values[i].getValue(), values[i].getType());
         }
         return new Value(methodInfo.getMethod().invoke(methodInfo.getActivator().newInstance(), arguments),
                 methodInfo.getMethod().getReturnType());

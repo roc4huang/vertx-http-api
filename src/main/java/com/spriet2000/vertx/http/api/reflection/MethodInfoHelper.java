@@ -7,7 +7,6 @@ import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
-import com.spriet2000.vertx.http.api.routing.Route;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

@@ -28,13 +28,13 @@ The @FromQuery specifies location for an argument
 
 The result of a method is serialized depending of the request content-type. For example json.
 
-The route names should be unique and can for example be to used to generate urls.
+The route names should be unique and can for example be used to generate urls.
 
 ```
 
 public  class OrderController extends Controller {
 
-    public final static String ROUTE_ORDER = "FooController.order";
+    public final static String ROUTE_ORDER = "OrderController.order";
 
     @Factory
     public static Supplier<Controller> newInstance() {

@@ -8,10 +8,10 @@ import io.vertx.core.Vertx;
 
 public class DefaultAppConfiguration implements AppConfiguration {
 
-    private Vertx vertx;
     private final Controllers controllers;
     private final Router router;
     private final AppHandler appHandler;
+    private Vertx vertx;
 
     public DefaultAppConfiguration(Vertx vertx, Controllers controllers, Router router, AppHandler appHandler) {
         this.vertx = vertx;
