@@ -34,11 +34,7 @@ public class MethodInfoHelper {
         return new MethodInfo(method.getName(), method, parametersBinder, parameters);
     }
 
-    public static Route findRoute(Method method) {
-        return AnnotationHelper.findFirstAnnotation(method.getAnnotations(), Route.class);
-    }
-
-    public static String getName(Method method) {
+    public static String buildMethodName(Method method) {
         return String.format("%s_%s", method.getDeclaringClass().getName(), method.getName());
     }
 }

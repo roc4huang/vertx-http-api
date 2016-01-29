@@ -32,7 +32,7 @@ public class MethodInfoTests {
         assertEquals(0, methodInfo.parameters().length);
         assertEquals(ControllerImpl.class, methodInfo.getActivator().newInstance().getClass());
         assertEquals(DefaultParametersBinder.class.getName(),
-                methodInfo.parametersBinder().getClass().getName());
+                methodInfo.binder().getClass().getName());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class MethodInfoTests {
         assertEquals(1, methodInfo.parameters().length);
         assertEquals("arg0", methodInfo.parameters()[0].name());
         assertEquals(DefaultParametersBinder.class.getName(),
-                methodInfo.parametersBinder().getClass().getName());
+                methodInfo.binder().getClass().getName());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class MethodInfoTests {
         assertEquals(1, methodInfo.parameters().length);
         assertEquals("test", methodInfo.parameters()[0].name());
         assertEquals(CustomParametersBinder.class.getName(),
-                methodInfo.parametersBinder().getClass().getName());
+                methodInfo.binder().getClass().getName());
     }
 
     @Test

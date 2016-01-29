@@ -24,9 +24,8 @@ public class DefaultApp implements App {
 
     private final Routes routes = new Routes();
 
-    private Handler<HttpServerRequest> handler;
     private AppConfiguration configuration;
-
+    private Handler<HttpServerRequest> handler;
 
     @Override
     public App builder(AppBuilder builder) {
@@ -49,7 +48,7 @@ public class DefaultApp implements App {
 
     private Handler<HttpServerRequest> handler() {
 
-        logger.info("Scanning for controllers");
+        logger.info("Mapping controllers");
 
         for (Class<? extends Controller> controllerClass : configuration.controllers().list()) {
             logger.info(String.format("Found controller %s", controllerClass));
@@ -59,13 +58,15 @@ public class DefaultApp implements App {
                 if (routeInfo == null) {
                     continue;
                 }
-                logger.info(String.format("Found accept %s", routeInfo));
+                logger.info(String.format("Found route %s", routeInfo));
                 MethodInfo methodInfo = toMethodInfo(method);
+
+                logger.info(String.format("Register method %s", methodInfo.getMethod()));
                 routes.put(routeInfo, methodInfo);
             }
         }
 
-        logger.info("Scanning for controllers completed");
+        logger.info("Mapping controllers completed");
 
         return configuration.router().accept(routes, configuration.appHandler());
     }

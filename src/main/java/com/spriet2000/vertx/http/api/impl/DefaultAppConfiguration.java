@@ -8,17 +8,21 @@ import io.vertx.core.Vertx;
 
 public class DefaultAppConfiguration implements AppConfiguration {
 
+    private Vertx vertx;
     private final Controllers controllers;
     private final Router router;
     private final AppHandler appHandler;
-    private Vertx vertx;
 
     public DefaultAppConfiguration(Vertx vertx, Controllers controllers, Router router, AppHandler appHandler) {
         this.vertx = vertx;
-
         this.controllers = controllers;
         this.router = router;
         this.appHandler = appHandler;
+    }
+
+    @Override
+    public Vertx vertx() {
+        return vertx;
     }
 
     @Override
@@ -34,10 +38,5 @@ public class DefaultAppConfiguration implements AppConfiguration {
     @Override
     public AppHandler appHandler() {
         return appHandler;
-    }
-
-    @Override
-    public Vertx vertx() {
-        return vertx;
     }
 }

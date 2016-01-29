@@ -28,7 +28,7 @@ public class OrderBeerTests extends AppTestBase {
 
     public static class OrderController extends Controller {
 
-        public final static String ROUTE_ORDER = "FooController.order";
+        public final static String ROUTE_ORDER = "OrderController.order";
 
         @Factory
         public static Supplier<Controller> supplier() {

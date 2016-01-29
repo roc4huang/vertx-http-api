@@ -4,14 +4,13 @@ import com.spriet2000.vertx.http.api.binding.value.Value;
 
 public class Result {
 
-    private Value resultValue;
-
-    public Result(Value value) {
-
-        this.resultValue = value;
-    }
+    private Value result;
 
     public Value value() {
-        return resultValue;
+        return result;
+    }
+
+    public void complete(Value result) {
+        this.result = result;
     }
 }

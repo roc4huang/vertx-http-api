@@ -22,7 +22,7 @@ public class RouteInfoHelper {
         HttpMethod httpMethod = findHttpMethod(annotations);
 
         return route.name().isEmpty()
-                ? new RouteInfo(MethodInfoHelper.getName(method), route, httpMethod)
+                ? new RouteInfo(MethodInfoHelper.buildMethodName(method), route, httpMethod)
                 : new RouteInfo(route.name(), route, httpMethod);
     }
 

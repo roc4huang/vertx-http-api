@@ -44,7 +44,7 @@ public class ParametersBinderTests {
 
         RouteContext context = new RouteContext(null, info, request, parameters);
 
-        ParametersBinder binder = info.parametersBinder();
+        ParametersBinder binder = info.binder();
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
@@ -68,7 +68,7 @@ public class ParametersBinderTests {
 
         RouteContext context = new RouteContext(null, info, request, parameters);
 
-        ParametersBinder binder = info.parametersBinder();
+        ParametersBinder binder = info.binder();
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
@@ -91,7 +91,7 @@ public class ParametersBinderTests {
 
         RouteContext context = new RouteContext(null, info, request, parameters);
 
-        ParametersBinder binder = info.parametersBinder();
+        ParametersBinder binder = info.binder();
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 
@@ -112,7 +112,7 @@ public class ParametersBinderTests {
 
         RouteContext context = new RouteContext(null, info, request, parameters);
 
-        ParametersBinder binder = info.parametersBinder();
+        ParametersBinder binder = info.binder();
         Value[] arguments = new Value[info.parameters().length];
         binder.bind(context, arguments);
 

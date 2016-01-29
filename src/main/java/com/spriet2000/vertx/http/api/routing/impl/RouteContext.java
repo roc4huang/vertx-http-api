@@ -10,15 +10,20 @@ public class RouteContext {
     private final MethodInfo methodInfo;
     private final Map<String, String> parameters;
     private HttpServerRequest request;
-    private Result resultValue;
 
-    public RouteContext(RouteInfo routeInfo, MethodInfo value,
-                        HttpServerRequest request, Map<String, String> parameters) {
-
+    public RouteContext(RouteInfo routeInfo, MethodInfo value, HttpServerRequest request, Map<String, String> parameters) {
         this.routeInfo = routeInfo;
         this.methodInfo = value;
         this.request = request;
         this.parameters = parameters;
+    }
+
+    public RouteInfo routeInfo() {
+        return routeInfo;
+    }
+
+    public MethodInfo method() {
+        return methodInfo;
     }
 
     public HttpServerRequest request() {
@@ -28,18 +33,4 @@ public class RouteContext {
     public Map<String, String> parameters() {
         return parameters;
     }
-
-    public MethodInfo methodInfo() {
-        return methodInfo;
-    }
-
-    public void result(Result result) {
-
-        this.resultValue = result;
-    }
-
-    public Result result() {
-        return resultValue;
-    }
-
 }

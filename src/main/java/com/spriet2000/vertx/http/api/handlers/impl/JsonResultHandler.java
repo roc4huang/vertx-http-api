@@ -4,27 +4,29 @@ package com.spriet2000.vertx.http.api.handlers.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.spriet2000.vertx.http.api.routing.impl.Result;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import io.vertx.core.http.HttpHeaders;
 
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 
-public class JsonResultHandler implements BiFunction<Consumer<Throwable>, Consumer<RouteContext>, Consumer<RouteContext>> {
+public class JsonResultHandler implements BiFunction<BiConsumer<RouteContext, Throwable>,
+        BiConsumer<RouteContext, Result>, BiConsumer<RouteContext, Result>> {
 
     @Override
-    public Consumer<RouteContext> apply(Consumer<Throwable> fail, Consumer<RouteContext> next) {
-        return ctx -> {
-            ObjectWriter writer = new ObjectMapper().writer();
+    public BiConsumer<RouteContext, Result> apply(BiConsumer<RouteContext, Throwable> fail, BiConsumer<RouteContext, Result> next) {
+        return (context, result) -> {
             try {
-                Object value = ctx.result().value().getValue();
+                ObjectWriter writer = new ObjectMapper().writer();
+                Object value = result.value().getValue();
                 String json = writer.writeValueAsString(value);
-                ctx.request().response().headers().add(HttpHeaders.CONTENT_LENGTH, String.valueOf(json.length()));
-                ctx.request().response().headers().add(HttpHeaders.CONTENT_TYPE, "application/json");
-                ctx.request().response().end(json);
-                next.accept(ctx);
+                context.request().response().headers().add(HttpHeaders.CONTENT_LENGTH, String.valueOf(json.length()));
+                context.request().response().headers().add(HttpHeaders.CONTENT_TYPE, "application/json");
+                context.request().response().end(json);
+                next.accept(context, result);
             } catch (JsonProcessingException e) {
-                fail.accept(e);
+                fail.accept(context, e);
             }
         };
     }

@@ -19,18 +19,15 @@ public class DefaultRouter implements Router {
 
     static Logger logger = LoggerFactory.getLogger(DefaultRouter.class);
 
-
     @Override
     public Handler<HttpServerRequest> accept(Routes routeRegistry, AppHandler appHandler) {
 
-        logger.info("Mapping routes");
+        logger.info("Mapping router");
 
         com.github.spriet2000.vertx.httprouter.Router router =
                 com.github.spriet2000.vertx.httprouter.Router.router();
 
         for (Map.Entry<RouteInfo, MethodInfo> entry : routeRegistry.entrySet()) {
-
-            logger.info("accept handler for accept");
 
             RouteInfo route = entry.getKey();
             MethodInfo method = entry.getValue();
@@ -52,9 +49,12 @@ public class DefaultRouter implements Router {
                 case PATCH:
                     router.patch(route.route().path(), handler);
             }
+
+            logger.info(String.format("Mapped handler to route %s %s %s",
+                    route.route().name(), route.httpMethod(), route.route().path()));
         }
 
-        logger.info("Mapping routes completed");
+        logger.info("Mapping router completed");
 
         return router;
     }

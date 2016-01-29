@@ -10,10 +10,8 @@ import io.vertx.core.Vertx;
 
 
 public class DefaultAppBuilder implements AppBuilder {
-
     private Vertx vertx;
     private Router router;
-
     private Controllers controllers;
     private AppHandler appHandler;
 

@@ -35,7 +35,7 @@ public final class MethodInfo {
         return new DefaultActivator(method.getDeclaringClass());
     }
 
-    public ParametersBinder parametersBinder() {
+    public ParametersBinder binder() {
         return parametersBinder;
     }
 }

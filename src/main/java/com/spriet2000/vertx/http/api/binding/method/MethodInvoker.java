@@ -6,7 +6,7 @@ import com.spriet2000.vertx.http.api.binding.value.Value;
 import java.lang.reflect.InvocationTargetException;
 
 public interface MethodInvoker {
-    static MethodInvoker methodInvoker(MethodInfo methodInfo) {
+    static MethodInvoker invoker(MethodInfo methodInfo) {
         return new DefaultMethodInvoker(methodInfo);
     }
 
