@@ -31,7 +31,7 @@ public final class MethodInfo {
         return name;
     }
 
-    public Activator getDeclaringClassActivator() {
+    public Activator getActivator() {
         return new DefaultActivator(method.getDeclaringClass());
     }
 

@@ -6,6 +6,7 @@ import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.method.MethodInvoker;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.ParametersBinder;
+import com.spriet2000.vertx.http.api.binding.method.impl.DefaultMethodInvoker;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
 import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.binding.value.Value;
@@ -29,7 +30,7 @@ public class MethodInfoTests {
         MethodInfo methodInfo = toMethodInfo(method);
 
         assertEquals(0, methodInfo.parameters().length);
-        assertEquals(ControllerImpl.class, methodInfo.getDeclaringClassActivator().newInstance().getClass());
+        assertEquals(ControllerImpl.class, methodInfo.getActivator().newInstance().getClass());
         assertEquals(DefaultParametersBinder.class.getName(),
                 methodInfo.parametersBinder().getClass().getName());
     }
@@ -60,7 +61,7 @@ public class MethodInfoTests {
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
         MethodInfo methodInfo = toMethodInfo(method);
 
-        MethodInvoker invoke = new MethodInvoker(methodInfo);
+        MethodInvoker invoke = new DefaultMethodInvoker(methodInfo);
         Object result = invoke.invoke(new Value("hello", String.class), new Value("world", String.class));
 
         assertNotNull(result);
