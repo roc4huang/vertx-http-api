@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 public interface Controllers {
 
-    static Controllers controllers() {
-        return new DefaultControllers();
+
+    static Controllers controllers(Class<? extends Controller> controller) {
+        return new DefaultControllers(controller);
+    }
+
+    static Controllers controllers(Class<? extends Controller>... controllers) {
+        return new DefaultControllers(controllers);
     }
 
     ArrayList<Class<? extends Controller>> list();
-
-    DefaultControllers add(Class<? extends Controller> controller);
 }

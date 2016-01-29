@@ -1,6 +1,6 @@
 package com.spriet2000.vertx.http.api;
 
-import com.spriet2000.vertx.http.api.controllers.impl.DefaultControllers;
+import com.spriet2000.vertx.http.api.controllers.Controllers;
 import com.spriet2000.vertx.http.api.impl.DefaultAppBuilder;
 import io.vertx.core.Vertx;
 
@@ -12,7 +12,7 @@ public interface AppBuilder {
 
     AppBuilder use(Router mapping);
 
-    AppBuilder use(DefaultControllers registry);
+    AppBuilder use(Controllers registry);
 
     AppBuilder use(AppHandler appHandler);
 

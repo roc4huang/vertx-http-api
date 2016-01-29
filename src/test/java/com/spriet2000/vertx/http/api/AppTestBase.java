@@ -1,6 +1,5 @@
-package com.spriet2000.vertx.http.api.helpers;
+package com.spriet2000.vertx.http.api;
 
-import com.spriet2000.vertx.http.api.App;
 import com.spriet2000.vertx.http.api.impl.DefaultApp;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.*;
@@ -9,8 +8,7 @@ import io.vertx.test.core.VertxTestBase;
 import java.util.concurrent.CountDownLatch;
 import java.util.function.Consumer;
 
-public class WebTestBase extends VertxTestBase {
-
+public class AppTestBase extends VertxTestBase {
 
     protected HttpServer server;
     protected HttpClient client;

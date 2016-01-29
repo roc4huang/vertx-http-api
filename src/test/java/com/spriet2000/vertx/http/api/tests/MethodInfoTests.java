@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api;
+package com.spriet2000.vertx.http.api.tests;
 
 
 import com.spriet2000.vertx.http.api.activation.Factory;

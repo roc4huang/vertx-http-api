@@ -4,6 +4,7 @@ import com.spriet2000.vertx.http.api.AppBuilder;
 import com.spriet2000.vertx.http.api.AppConfiguration;
 import com.spriet2000.vertx.http.api.AppHandler;
 import com.spriet2000.vertx.http.api.Router;
+import com.spriet2000.vertx.http.api.controllers.Controllers;
 import com.spriet2000.vertx.http.api.controllers.impl.DefaultControllers;
 import io.vertx.core.Vertx;
 
@@ -13,7 +14,7 @@ public class DefaultAppBuilder implements AppBuilder {
     private Vertx vertx;
     private Router router;
 
-    private DefaultControllers controllers;
+    private Controllers controllers;
     private AppHandler appHandler;
 
     public DefaultAppBuilder(Vertx vertx) {
@@ -27,7 +28,7 @@ public class DefaultAppBuilder implements AppBuilder {
     }
 
     @Override
-    public AppBuilder use(DefaultControllers controllers) {
+    public AppBuilder use(Controllers controllers) {
         this.controllers = controllers;
         return this;
     }

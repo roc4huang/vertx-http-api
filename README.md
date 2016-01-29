@@ -12,11 +12,11 @@ At verticle start the verticle scans for controller instances on a given path an
 ```
 
 App app = App.create(builder(vertx)
-    .use(controllers().add(OrderController.class)));
+        .use(controllers(OrderController.class)));
 
 vertx.createHttpServer(options)
-    .requestHandler(app)
-    .listen();
+        .requestHandler(app)
+        .listen();
 
 ```
 

@@ -33,7 +33,7 @@ public class Example extends AbstractVerticle {
     public void example() {
 
         App app = App.create(builder(vertx)
-                .use(controllers().add(OrderController.class)));
+                .use(controllers(OrderController.class)));
 
         vertx.createHttpServer(options)
                 .requestHandler(app)

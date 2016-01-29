@@ -1,5 +1,6 @@
-package com.spriet2000.vertx.http.api;
+package com.spriet2000.vertx.http.api.tests;
 
+import com.spriet2000.vertx.http.api.TestHttpServerRequest;
 import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
