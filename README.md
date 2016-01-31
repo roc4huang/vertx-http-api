@@ -22,11 +22,11 @@ vertx.createHttpServer(options)
 
 ### Controller 
 
-The @FromQuery specifies location for an argument
+The @FromCookie specifies location for an argument
 
 The result of a method is serialized depending of the request content-type. For example json.
 
-The route names should be unique and can for example be used to generate urls.
+Vertx and context are available in controller.
 
 ```
 
@@ -37,10 +37,10 @@ public static class OrderController extends Controller {
     @Get
     @Route(name = ROUTE_ORDER, path = "/order/:beer")
     public String order(@Parameter(name = "beer") String beer,
-                        @FromQuery @Parameter(name = "amount") int amount) {
+                        @FromCookie @Parameter(name = "amount") int amount) {
 
-        logger.info(String.format("path: %s, name: %s", context().routeInfo().path(),
-                context().routeInfo().name()));
+        logger.info(String.format("path: %s, name: %s",
+                context().routeInfo().path(), context().routeInfo().name()));
 
         return String.format("Order %s %s", amount, beer);
     }

@@ -1,6 +1,7 @@
 package com.spriet2000.vertx.http.api.impl;
 
 import com.github.spriet2000.vertx.httprouter.RouteHandler;
+import com.spriet2000.vertx.http.api.AppConfiguration;
 import com.spriet2000.vertx.http.api.AppHandler;
 import com.spriet2000.vertx.http.api.Router;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
@@ -21,24 +22,25 @@ public class DefaultRouter implements Router {
     static Logger logger = LoggerFactory.getLogger(DefaultRouter.class);
 
     @Override
-    public Handler<HttpServerRequest> accept(Routes routeRegistry, AppHandler appHandler) {
+    public Handler<HttpServerRequest> accept(Routes routes, AppConfiguration configuration) {
 
         logger.info("Mapping router");
 
         com.github.spriet2000.vertx.httprouter.Router router =
                 com.github.spriet2000.vertx.httprouter.Router.router();
 
-        for (Map.Entry<RouteInfo, MethodInfo> entry : routeRegistry.entrySet()) {
+        for (Map.Entry<RouteInfo, MethodInfo> entry : routes.entrySet()) {
 
             RouteInfo route = entry.getKey();
             MethodInfo method = entry.getValue();
 
             RouteHandler handler = (request, params) -> {
                 RouteContext context = new RouteContext(route, request);
-                RouteResult result = new RouteResult(method);
                 params.forEach((k, v) -> context.data().add(k, v));
+                RouteResult result = new RouteResult(method);
                 result.controller().routeContext(context);
-                appHandler.accept(context, result);
+                result.controller().vertx(configuration.vertx());
+                configuration.appHandler().accept(context, result);
             };
 
             switch (route.httpMethod()) {

@@ -7,5 +7,5 @@ import io.vertx.core.http.HttpServerRequest;
 
 public interface Router {
 
-    Handler<HttpServerRequest> accept(Routes routeRegistry, AppHandler handler);
+    Handler<HttpServerRequest> accept(Routes routes, AppConfiguration configuration);
 }

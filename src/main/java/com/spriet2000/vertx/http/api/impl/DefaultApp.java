@@ -68,6 +68,6 @@ public class DefaultApp implements App {
 
         logger.info("Mapping controllers completed");
 
-        return configuration.router().accept(routes, configuration.appHandler());
+        return configuration.router().accept(routes, configuration);
     }
 }

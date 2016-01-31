@@ -4,6 +4,7 @@ import com.spriet2000.vertx.http.api.App;
 import com.spriet2000.vertx.http.api.activation.Factory;
 import com.spriet2000.vertx.http.api.binding.method.Parameters;
 import com.spriet2000.vertx.http.api.binding.method.impl.DefaultParametersBinder;
+import com.spriet2000.vertx.http.api.binding.parameter.FromCookie;
 import com.spriet2000.vertx.http.api.binding.parameter.FromQuery;
 import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.controllers.Controller;
@@ -42,10 +43,10 @@ public class Example extends AbstractVerticle {
         @Get
         @Route(name = ROUTE_ORDER, path = "/order/:beer")
         public String order(@Parameter(name = "beer") String beer,
-                            @FromQuery @Parameter(name = "amount") int amount) {
+                            @FromCookie @Parameter(name = "amount") int amount) {
 
-            logger.info(String.format("path: %s, name: %s", context().routeInfo().path(),
-                    context().routeInfo().name()));
+            logger.info(String.format("path: %s, name: %s",
+                    context().routeInfo().path(), context().routeInfo().name()));
 
             return String.format("Order %s %s", amount, beer);
         }
