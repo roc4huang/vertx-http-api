@@ -43,21 +43,21 @@ public class DefaultRouter implements Router {
 
             switch (route.httpMethod()) {
                 case GET:
-                    router.get(route.route().path(), handler);
+                    router.get(route.path(), handler);
                 case HEAD:
-                    router.head(route.route().path(), handler);
+                    router.head(route.path(), handler);
                 case POST:
-                    router.post(route.route().path(), handler);
+                    router.post(route.path(), handler);
                 case PUT:
-                    router.put(route.route().path(), handler);
+                    router.put(route.path(), handler);
                 case DELETE:
-                    router.delete(route.route().path(), handler);
+                    router.delete(route.path(), handler);
                 case PATCH:
-                    router.patch(route.route().path(), handler);
+                    router.patch(route.path(), handler);
             }
 
             logger.info(String.format("Mapped handler to route %s %s %s",
-                    route.route().name(), route.httpMethod(), route.route().path()));
+                    route.name(), route.httpMethod(), route.path()));
         }
 
         logger.info("Mapping router completed");

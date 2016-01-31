@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.handlers.request.impl;
+package com.spriet2000.vertx.http.api.handlers.impl;
 
 import com.spriet2000.vertx.http.api.binding.value.Value;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;

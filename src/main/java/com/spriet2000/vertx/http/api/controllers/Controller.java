@@ -11,7 +11,7 @@ public abstract class Controller {
         this.context = context;
     }
 
-    public RouteContext routeContext() {
+    public RouteContext context() {
 
         return context;
     }

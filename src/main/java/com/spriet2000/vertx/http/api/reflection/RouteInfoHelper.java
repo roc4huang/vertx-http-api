@@ -22,8 +22,8 @@ public class RouteInfoHelper {
         HttpMethod httpMethod = findHttpMethod(annotations);
 
         return route.name().isEmpty()
-                ? new RouteInfo(MethodInfoHelper.buildMethodName(method), route, httpMethod)
-                : new RouteInfo(route.name(), route, httpMethod);
+                ? new RouteInfo(MethodInfoHelper.buildMethodName(method), route.path(), httpMethod)
+                : new RouteInfo(route.name(), route.path(), httpMethod);
     }
 
     private static HttpMethod findHttpMethod(Annotation[] annotations) {

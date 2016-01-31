@@ -22,8 +22,6 @@ vertx.createHttpServer(options)
 
 ### Controller 
 
-The @Factory is a factory method for the controller. A controller instance is made for every request.
-
 The @FromQuery specifies location for an argument
 
 The result of a method is serialized depending of the request content-type. For example json.
@@ -32,22 +30,20 @@ The route names should be unique and can for example be used to generate urls.
 
 ```
 
-public  class OrderController extends Controller {
+public static class OrderController extends Controller {
 
     public final static String ROUTE_ORDER = "OrderController.order";
-
-    @Factory
-    public static Supplier<Controller> newInstance() {
-        return OrderController::new;
-    }
 
     @Get
     @Route(name = ROUTE_ORDER, path = "/order/:beer")
     public String order(@Parameter(name = "beer") String beer,
                         @FromQuery @Parameter(name = "amount") int amount) {
+
+        logger.info(String.format("path: %s, name: %s", context().routeInfo().path(),
+                context().routeInfo().name()));
+
         return String.format("Order %s %s", amount, beer);
     }
-
 }
 
 ```

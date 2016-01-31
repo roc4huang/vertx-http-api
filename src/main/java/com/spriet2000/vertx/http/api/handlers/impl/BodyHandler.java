@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.handlers.request.impl;
+package com.spriet2000.vertx.http.api.handlers.impl;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,10 +13,8 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-public class JsonBodyHandler implements BiFunction<BiConsumer<RouteContext, Throwable>, BiConsumer<RouteContext, RouteResult>,
+public class BodyHandler implements BiFunction<BiConsumer<RouteContext, Throwable>, BiConsumer<RouteContext, RouteResult>,
         BiConsumer<RouteContext, RouteResult>> {
-
-    private Class clazz;
 
     @Override
     public BiConsumer<RouteContext, RouteResult> apply(BiConsumer<RouteContext, Throwable> fail, BiConsumer<RouteContext, RouteResult> next) {
@@ -35,7 +33,8 @@ public class JsonBodyHandler implements BiFunction<BiConsumer<RouteContext, Thro
                 context.request().endHandler(e -> {
                     try {
                         ObjectMapper mapper = new ObjectMapper();
-                        Map<String, String> map = mapper.readValue(body.toString(), new TypeReference<Map<String, String>>(){});
+                        Map<String, String> map = mapper.readValue(body.toString(), new TypeReference<Map<String, String>>() {
+                        });
                         context.data().addAll(map);
                         next.accept(context, result);
                     } catch (Exception exception) {

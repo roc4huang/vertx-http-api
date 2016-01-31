@@ -11,6 +11,8 @@ import com.spriet2000.vertx.http.api.routing.Get;
 import com.spriet2000.vertx.http.api.routing.Route;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServerOptions;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
 
 import java.util.function.Supplier;
 
@@ -18,6 +20,8 @@ import static com.spriet2000.vertx.http.api.AppBuilder.builder;
 import static com.spriet2000.vertx.http.api.controllers.Controllers.controllers;
 
 public class Example extends AbstractVerticle {
+
+    static Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     HttpServerOptions options = new HttpServerOptions().setPort(8080);
 
@@ -35,18 +39,15 @@ public class Example extends AbstractVerticle {
 
         public final static String ROUTE_ORDER = "OrderController.order";
 
-        @Factory
-        public static Supplier<Controller> newInstance() {
-            return OrderController::new;
-        }
-
         @Get
         @Route(name = ROUTE_ORDER, path = "/order/:beer")
-        @Parameters(binder = DefaultParametersBinder.class)
         public String order(@Parameter(name = "beer") String beer,
                             @FromQuery @Parameter(name = "amount") int amount) {
+
+            logger.info(String.format("path: %s, name: %s", context().routeInfo().path(),
+                    context().routeInfo().name()));
+
             return String.format("Order %s %s", amount, beer);
         }
-
     }
 }

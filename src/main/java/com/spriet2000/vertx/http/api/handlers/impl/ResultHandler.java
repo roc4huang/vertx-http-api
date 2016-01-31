@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.handlers.response.impl;
+package com.spriet2000.vertx.http.api.handlers.impl;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,7 +11,7 @@ import io.vertx.core.http.HttpHeaders;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-public class JsonResultHandler implements BiFunction<BiConsumer<RouteContext, Throwable>,
+public class ResultHandler implements BiFunction<BiConsumer<RouteContext, Throwable>,
         BiConsumer<RouteContext, RouteResult>, BiConsumer<RouteContext, RouteResult>> {
 
     @Override

@@ -4,30 +4,25 @@ import com.spriet2000.vertx.http.api.routing.Route;
 import io.vertx.core.http.HttpMethod;
 
 public class RouteInfo {
-    private final Route route;
+    private String name;
+    private final String path;
     private final HttpMethod httpMethod;
 
-    public RouteInfo(String name, Route route, HttpMethod httpMethod) {
-
-        this.route = route;
+    public RouteInfo(String name, String path, HttpMethod httpMethod) {
+        this.name = name;
+        this.path = path;
         this.httpMethod = httpMethod;
     }
 
-    public Route route() {
-        return route;
+    public String path() {
+        return path;
     }
 
     public HttpMethod httpMethod() {
         return httpMethod;
     }
 
-    @Override
-    public int hashCode() {
-        return route.path().hashCode();
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        return route.path().equals(object);
+    public String name() {
+        return name;
     }
 }

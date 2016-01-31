@@ -1,4 +1,4 @@
-package com.spriet2000.vertx.http.api.handlers.request.impl;
+package com.spriet2000.vertx.http.api.handlers.impl;
 
 import com.spriet2000.vertx.http.api.binding.data.DataBinder;
 import com.spriet2000.vertx.http.api.binding.data.imp.DefaultDataBinder;

@@ -15,16 +15,16 @@ import static com.spriet2000.vertx.http.api.binding.value.Converter.convert;
 
 public final class DefaultMethodInvoker implements MethodInvoker {
 
-
     @Override
     public Value invoke(RouteContext context, RouteResult routeResult) throws InvocationTargetException, IllegalAccessException {
+        Method method = routeResult.methodInfo().getMethod();
 
         ArrayList<Value> values = new ArrayList<>();
         routeResult.methodInfo().binder().bind(context, routeResult.methodInfo(), values);
 
         Object[] arguments = values.stream().map(c -> convert(c.getValue(), c.getType())).toArray();
-        Method method = routeResult.methodInfo().getMethod();
+        Value result = new Value(method.invoke(routeResult.controller(), arguments), method.getReturnType());
 
-        return new Value(method.invoke(routeResult.controller(), arguments), method.getReturnType());
+        return result;
     }
 }
