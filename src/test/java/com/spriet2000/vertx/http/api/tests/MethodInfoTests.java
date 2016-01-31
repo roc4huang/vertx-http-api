@@ -12,10 +12,12 @@ import com.spriet2000.vertx.http.api.binding.parameter.Parameter;
 import com.spriet2000.vertx.http.api.binding.value.Value;
 import com.spriet2000.vertx.http.api.controllers.Controller;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
+import com.spriet2000.vertx.http.api.routing.impl.RouteResult;
 import org.junit.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.function.Supplier;
 
 import static com.spriet2000.vertx.http.api.reflection.MethodInfoHelper.toMethodInfo;
@@ -61,8 +63,12 @@ public class MethodInfoTests {
         Method method = ControllerImpl.class.getMethod("method1", String.class, String.class);
         MethodInfo methodInfo = toMethodInfo(method);
 
-        MethodInvoker invoke = new DefaultMethodInvoker(methodInfo);
-        Value result = invoke.invoke(new Value("hello", String.class), new Value("world", String.class));
+        RouteContext context = new RouteContext(null, null);
+        context.data().add("arg0", "hello");
+        context.data().add("arg1", "world");
+
+        MethodInvoker invoke = new DefaultMethodInvoker();
+        Value result = invoke.invoke(context, new RouteResult(methodInfo));
 
         assertNotNull(result);
         assertEquals("hello world", result.getValue());
@@ -96,8 +102,9 @@ public class MethodInfoTests {
 
     public static class CustomParametersBinder implements ParametersBinder {
 
+
         @Override
-        public void bind(RouteContext context, Value... arguments) {
+        public void bind(RouteContext context, MethodInfo methodInfo, ArrayList<Value> arguments) {
 
         }
     }

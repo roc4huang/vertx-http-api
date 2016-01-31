@@ -7,13 +7,11 @@ import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
 import java.lang.reflect.Method;
 
 public final class MethodInfo {
-    private final String name;
     private final Method method;
     private final ParameterInfo[] parameters;
     private final ParametersBinder parametersBinder;
 
-    public MethodInfo(String name, Method method, ParametersBinder parametersBinder, ParameterInfo[] parameterInfos) {
-        this.name = name;
+    public MethodInfo(Method method, ParametersBinder parametersBinder, ParameterInfo[] parameterInfos) {
         this.method = method;
         this.parametersBinder = parametersBinder;
         this.parameters = parameterInfos;
@@ -25,10 +23,6 @@ public final class MethodInfo {
 
     public ParameterInfo[] parameters() {
         return parameters;
-    }
-
-    public String name() {
-        return name;
     }
 
     public Activator getActivator() {

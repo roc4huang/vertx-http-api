@@ -1,25 +1,25 @@
-package com.spriet2000.vertx.http.api.handlers.impl;
+package com.spriet2000.vertx.http.api.handlers.request.impl;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spriet2000.vertx.http.api.binding.value.Value;
-import com.spriet2000.vertx.http.api.routing.impl.Result;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
+import com.spriet2000.vertx.http.api.routing.impl.RouteResult;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpMethod;
 
-
+import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
-public class JsonBodyHandler implements BiFunction<BiConsumer<RouteContext, Throwable>, BiConsumer<RouteContext, Result>,
-        BiConsumer<RouteContext, Result>> {
+public class JsonBodyHandler implements BiFunction<BiConsumer<RouteContext, Throwable>, BiConsumer<RouteContext, RouteResult>,
+        BiConsumer<RouteContext, RouteResult>> {
 
     private Class clazz;
 
     @Override
-    public BiConsumer<RouteContext, Result> apply(BiConsumer<RouteContext, Throwable> fail, BiConsumer<RouteContext, Result> next) {
+    public BiConsumer<RouteContext, RouteResult> apply(BiConsumer<RouteContext, Throwable> fail, BiConsumer<RouteContext, RouteResult> next) {
         return (context, result) -> {
             if (context.request().headers().contains(HttpHeaders.Names.CONTENT_TYPE)
                     && !context.request().headers().get(HttpHeaders.Names.CONTENT_TYPE).equals("application/json")) {
@@ -35,7 +35,8 @@ public class JsonBodyHandler implements BiFunction<BiConsumer<RouteContext, Thro
                 context.request().endHandler(e -> {
                     try {
                         ObjectMapper mapper = new ObjectMapper();
-                        context.body(mapper.readValue(body.toString(), clazz));
+                        Map<String, String> map = mapper.readValue(body.toString(), new TypeReference<Map<String, String>>(){});
+                        context.data().addAll(map);
                         next.accept(context, result);
                     } catch (Exception exception) {
                         fail.accept(context, exception);

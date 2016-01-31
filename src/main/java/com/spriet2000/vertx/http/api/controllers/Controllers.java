@@ -11,6 +11,7 @@ public interface Controllers {
         return new DefaultControllers(controller);
     }
 
+    @SafeVarargs
     static Controllers controllers(Class<? extends Controller>... controllers) {
         return new DefaultControllers(controllers);
     }

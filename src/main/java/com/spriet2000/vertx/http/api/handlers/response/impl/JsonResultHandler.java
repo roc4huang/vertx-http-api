@@ -1,21 +1,21 @@
-package com.spriet2000.vertx.http.api.handlers.impl;
+package com.spriet2000.vertx.http.api.handlers.response.impl;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.spriet2000.vertx.http.api.routing.impl.Result;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
+import com.spriet2000.vertx.http.api.routing.impl.RouteResult;
 import io.vertx.core.http.HttpHeaders;
 
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 public class JsonResultHandler implements BiFunction<BiConsumer<RouteContext, Throwable>,
-        BiConsumer<RouteContext, Result>, BiConsumer<RouteContext, Result>> {
+        BiConsumer<RouteContext, RouteResult>, BiConsumer<RouteContext, RouteResult>> {
 
     @Override
-    public BiConsumer<RouteContext, Result> apply(BiConsumer<RouteContext, Throwable> fail, BiConsumer<RouteContext, Result> next) {
+    public BiConsumer<RouteContext, RouteResult> apply(BiConsumer<RouteContext, Throwable> fail, BiConsumer<RouteContext, RouteResult> next) {
         return (context, result) -> {
             try {
                 ObjectWriter writer = new ObjectMapper().writer();

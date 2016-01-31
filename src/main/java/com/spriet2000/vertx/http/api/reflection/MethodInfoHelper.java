@@ -30,7 +30,7 @@ public class MethodInfoHelper {
             DefaultActivator activator = new DefaultActivator(annotation.binder());
             parametersBinder = (ParametersBinder) activator.newInstance();
         }
-        return new MethodInfo(method.getName(), method, parametersBinder, parameters);
+        return new MethodInfo(method, parametersBinder, parameters);
     }
 
     public static String buildMethodName(Method method) {

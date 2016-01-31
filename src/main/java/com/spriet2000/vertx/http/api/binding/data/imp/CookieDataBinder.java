@@ -1,26 +1,23 @@
-package com.spriet2000.vertx.http.api.binding.value.impl;
+package com.spriet2000.vertx.http.api.binding.data.imp;
 
-import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
+import com.spriet2000.vertx.http.api.binding.data.DataBinder;
 import com.spriet2000.vertx.http.api.binding.parameter.ParameterInfo;
-import com.spriet2000.vertx.http.api.binding.value.Value;
-import com.spriet2000.vertx.http.api.binding.value.ValueBinder;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import io.netty.handler.codec.http.cookie.ServerCookieDecoder;
 
 import static io.vertx.core.http.HttpHeaders.COOKIE;
 
-public class CookieValueBinder implements ValueBinder {
+public class CookieDataBinder implements DataBinder {
 
     @Override
-    public Value bind(RouteContext context, MethodInfo methodInfo, ParameterInfo parameterInfo) {
+    public void bind(RouteContext context, ParameterInfo parameterInfo) {
         String header = context.request().headers().get(COOKIE);
         if (header != null) {
             for (io.netty.handler.codec.http.cookie.Cookie cookie : ServerCookieDecoder.STRICT.decode(header)) {
                 if (cookie.name().equalsIgnoreCase(parameterInfo.name())) {
-                    return new Value(cookie.value(), parameterInfo.parameter().getType());
+                    context.data().add(cookie.name(), cookie.value());
                 }
             }
         }
-        return null;
     }
 }

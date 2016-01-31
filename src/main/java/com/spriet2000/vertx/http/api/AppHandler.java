@@ -1,7 +1,9 @@
 package com.spriet2000.vertx.http.api;
 
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
-import io.vertx.core.Handler;
+import com.spriet2000.vertx.http.api.routing.impl.RouteResult;
 
-public interface AppHandler extends Handler<RouteContext> {
+import java.util.function.BiConsumer;
+
+public interface AppHandler extends BiConsumer<RouteContext, RouteResult> {
 }

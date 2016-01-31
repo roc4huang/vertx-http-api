@@ -6,6 +6,7 @@ import com.spriet2000.vertx.http.api.Router;
 import com.spriet2000.vertx.http.api.binding.method.MethodInfo;
 import com.spriet2000.vertx.http.api.routing.impl.RouteContext;
 import com.spriet2000.vertx.http.api.routing.impl.RouteInfo;
+import com.spriet2000.vertx.http.api.routing.impl.RouteResult;
 import com.spriet2000.vertx.http.api.routing.impl.Routes;
 import io.vertx.core.Handler;
 import io.vertx.core.http.HttpServerRequest;
@@ -32,8 +33,13 @@ public class DefaultRouter implements Router {
             RouteInfo route = entry.getKey();
             MethodInfo method = entry.getValue();
 
-            RouteHandler handler = (req, params) ->
-                    appHandler.handle(new RouteContext(route, method, req, params));
+            RouteHandler handler = (request, params) -> {
+                RouteContext context = new RouteContext(route, request);
+                RouteResult result = new RouteResult(method);
+                params.forEach((k, v) -> context.data().add(k, v));
+                result.controller().routeContext(context);
+                appHandler.accept(context, result);
+            };
 
             switch (route.httpMethod()) {
                 case GET:
